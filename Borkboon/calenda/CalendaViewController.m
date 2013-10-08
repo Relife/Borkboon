@@ -37,6 +37,8 @@
     
     self.calendarView.delegate = self;
     [self.calendarView setParent:viewCal];
+    [viewCal setClipsToBounds:YES];
+    
 }
 
 - (void)viewDidLoad
@@ -45,6 +47,8 @@
 	// Do any additional setup after loading the view.
     
     [notiSwitch setOn: [[NSUserDefaults standardUserDefaults] boolForKey:@"SET_PRAYDAY_NOTI"]];
+    
+    [self calendarView:self.calendarView didSelectDate:[NSDate date]];
 }
 
 - (void) viewDidDisappear:(BOOL)animated{

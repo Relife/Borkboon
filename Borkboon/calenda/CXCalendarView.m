@@ -15,6 +15,8 @@
 #import "UILabel+CXCalendar.h"
 #import "UIButton+CXCalendar.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 
 static const CGFloat kGridMargin = 4;
 static const CGFloat kDefaultMonthBarButtonWidth = 60;
@@ -26,6 +28,9 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
     
     NSMutableDictionary* item;
     NSMutableArray* list;
+    
+    BOOL alreadyAdd;
+    BOOL alreadyAdd2;
 }
 @end
 
@@ -49,16 +54,32 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
 
 - (void) setDefaults {
     
+    alreadyAdd = NO;
+    alreadyAdd2 = NO;
+    
     [self loadMoonDayWithYear:@"2013"];
     
+    
     self.backgroundColor = [UIColor clearColor];
+    
+    
 
     CGGradientRef gradient = CGGradientCreateWithColors(NULL,
         (CFArrayRef)CFBridgingRetain(@[
                       (id)[UIColor colorWithRed:188/255. green:200/255. blue:215/255. alpha:1].CGColor,
                       (id)[UIColor colorWithRed:125/255. green:150/255. blue:179/255. alpha:1].CGColor]), NULL);
+    CGGradientRef cellGradient = CGGradientCreateWithColors(NULL,
+                                (CFArrayRef)CFBridgingRetain(@[
+         (id)[UIColor colorWithRed:188/255. green:200/255. blue:215/255. alpha:1].CGColor,
+         (id)[UIColor colorWithRed:245/255. green:245/255. blue:245/255. alpha:1].CGColor]), NULL);
 
     self.monthBarBackgroundColor = [UIColor cx_colorWithGradient:gradient size:CGSizeMake(1, 48)];
+    
+    
+    
+    
+    
+    
     // TODO: Merge default text attributes when given custom ones!
     self.monthLabelTextAttributes = @{
         UITextAttributeTextColor : [UIColor whiteColor],
@@ -72,13 +93,13 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
         UITextAttributeTextShadowOffset : [NSValue valueWithCGSize:CGSizeMake(0, 1)]
         };
     self.cellLabelNormalTextAttributes = @{
-        UITextAttributeTextColor : [UIColor grayColor]
+        UITextAttributeTextColor : [UIColor blackColor]
     };
     self.cellLabelSelectedTextAttributes = @{
         UITextAttributeTextColor : [UIColor whiteColor]
     };
     self.cellSelectedBackgroundColor = [UIColor grayColor];
-    self.cellNormalBackgroundColor = [UIColor clearColor];
+    self.cellNormalBackgroundColor = [UIColor cx_colorWithGradient:cellGradient size:CGSizeMake(1, 48)];//[UIColor whiteColor];
 
     _dateFormatter = [NSDateFormatter new];
     _dateFormatter.locale = [NSLocale autoupdatingCurrentLocale];
@@ -304,13 +325,31 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
         self.monthBar.frame = CGRectZero;
     }
 
+    
     if (self.weekBarHeight) {
+        
+        if (!alreadyAdd) {
+            CGGradientRef gradient = CGGradientCreateWithColors(NULL,
+                                                                (CFArrayRef)CFBridgingRetain(@[
+                                                                                             (id)[UIColor colorWithRed:188/255. green:200/255. blue:215/255. alpha:1].CGColor,
+                                                                                             (id)[UIColor colorWithRed:125/255. green:150/255. blue:179/255. alpha:1].CGColor]), NULL);
+            
+            UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, top-1, bound.size.width, self.weekBarHeight+2)];
+            [view setBackgroundColor:[UIColor cx_colorWithGradient:gradient size:CGSizeMake(1, 48)]];
+            
+            [self addSubview:view];
+            alreadyAdd = YES;
+        }
+        
+        
         self.weekdayBar.frame = CGRectMake(0, top, bound.size.width, self.weekBarHeight);
         CGRect contentRect = CGRectInset(self.weekdayBar.bounds, kGridMargin, 0);
         for (NSUInteger i = 0; i < [self.weekdayNameLabels count]; ++i) {
             UILabel *label = [self.weekdayNameLabels objectAtIndex:i];
-            label.frame = CGRectMake((contentRect.size.width / 7) * (i % 7), 0,
+            label.frame = CGRectMake( kGridMargin + (contentRect.size.width / 7) * (i % 7), 0,
                                      contentRect.size.width / 7, contentRect.size.height);
+            [label setBackgroundColor:[UIColor clearColor]];
+            
         }
         top = self.weekdayBar.frame.origin.y + self.weekdayBar.frame.size.height;
     } else {
@@ -332,8 +371,30 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
     self.gridView.frame = CGRectMake(kGridMargin, top,
                                      bound.size.width - kGridMargin * 2,
                                      bound.size.height - top);
+    
+    
+    
+    
+    //[self.gridView.layer setBorderWidth:1];
+    //[self.gridView.layer setBorderColor:[UIColor blackColor].CGColor];
+    
     CGFloat cellHeight = self.gridView.bounds.size.height / 6.0;
-    CGFloat cellWidth = (self.bounds.size.width - kGridMargin * 2) / 7.0;
+    CGFloat cellWidth = (bound.size.width - kGridMargin * 2) / 7.0;
+    
+    if (!alreadyAdd2) {
+        CGGradientRef gradient = CGGradientCreateWithColors(NULL,
+                                                            (CFArrayRef)CFBridgingRetain(@[
+                                                                                         (id)[UIColor colorWithRed:188/255. green:200/255. blue:215/255. alpha:1].CGColor,
+                                                                                         (id)[UIColor colorWithRed:125/255. green:150/255. blue:179/255. alpha:1].CGColor]), NULL);
+        
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, top-1, bound.size.width, cellHeight*6 + 2)];
+        [view setBackgroundColor:[UIColor cx_colorWithGradient:gradient size:CGSizeMake(1, view.bounds.size.height)]];
+        
+        [self addSubview:view];
+        [self bringSubviewToFront:self.gridView];
+        alreadyAdd2 = YES;
+    }
+    
     for (NSUInteger i = 0; i < [self.dayCells count]; ++i) {
         CXCalendarCellView *cellView = [self.dayCells objectAtIndex:i];
         cellView.frame = CGRectMake(cellWidth * ((shift + i) % 7), cellHeight * ((shift + i) / 7),
@@ -445,6 +506,8 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
         NSMutableArray *cells = [NSMutableArray array];
         for (NSUInteger i = 1; i <= 31; ++i) {
             CXCalendarCellView *cell = [CXCalendarCellView new];
+            [cell.layer setBorderWidth:1];
+            [cell.layer setBorderColor:[UIColor grayColor].CGColor];
             cell.tag = i;
             cell.day = i;
             [cell addTarget: self

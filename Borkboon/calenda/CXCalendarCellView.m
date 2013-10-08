@@ -7,6 +7,7 @@
 //
 
 #import "CXCalendarCellView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation CXCalendarCellView
 
@@ -14,6 +15,10 @@
 - (void) setDay: (NSUInteger) day {
     if (_day != day) {
         _day = day;
+        //self.layer.borderWidth = 2;
+        //self.layer.borderColor = (__bridge CGColorRef)([UIColor blackColor]);
+        
+        
         [self setTitle: [NSString stringWithFormat: @"%d", _day] forState: UIControlStateNormal];
     }
 }
