@@ -35,5 +35,7 @@ enum LOGIN_STATE {
 // 2 facebook
 // -1 log out
 @property (nonatomic, readwrite ) int loginState;
+@property (nonatomic, retain ) NSString* userID;
+
 
 @end

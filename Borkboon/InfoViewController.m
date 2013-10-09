@@ -9,9 +9,12 @@
 #import "InfoViewController.h"
 #import "SBJson.h"
 #import "InfoTableViewController.h"
+#import "AppDelegate.h"
 
 @interface InfoViewController ()
-
+{
+    NSString* uid;
+}
 
 @end
 
@@ -30,19 +33,41 @@
 {
     [super viewDidLoad];
     //UIButtonItem
+ 
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.loginState == LSTATE_LOGOUT || app.loginState == LSTATE_NOT_LOGIN) {
+        
+        // Create login view
+        UIViewController* view = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNavigationView"];
+        [self presentViewController:view animated:YES completion:nil];
+        
+    }
+    else if(app.loginState == LSTATE_LOGIN_EMAIL){
+        uid = app.userID;
+        [self LoadData];
+    }
+    else if(app.loginState == LSTATE_LOGIN_FACEBOOK){
+        [self LoadData];
+    }
+}
+
+- (void) LoadData{
     UIImage* setting = [UIImage imageNamed:@"icon_setting.png"];
     CGRect frameimg = CGRectMake(0, 0, setting.size.width, setting.size.height);
     UIButton *ButtonSetting = [[UIButton alloc] initWithFrame:frameimg];
     [ButtonSetting setBackgroundImage:setting forState:UIControlStateNormal];
     [ButtonSetting addTarget:self action:@selector(setting)
-                forControlEvents:UIControlEventTouchUpInside];
+            forControlEvents:UIControlEventTouchUpInside];
     [ButtonSetting setShowsTouchWhenHighlighted:YES];
     
     UIBarButtonItem *SettingBt =[[UIBarButtonItem alloc] initWithCustomView:ButtonSetting];
     self.navigationItem.rightBarButtonItem=SettingBt;
     
     
-    NSString *post =[[NSString alloc] initWithFormat:@"uid=18"];
+    NSString *post =[[NSString alloc] initWithFormat:@"uid=%@",uid];
     NSLog(@"PostData: %@",post);
     
     NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getuserinfo.php"];
@@ -69,30 +94,30 @@
     if ([response statusCode] >=200 && [response statusCode] <300)
     {
         NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-                NSLog(@"Response ==> %@", responseData);
+        NSLog(@"Response ==> %@", responseData);
         
         SBJsonParser *jsonParser = [SBJsonParser new];
         NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
         NSLog(@"%@",jsonData);
         
-            NSString *first = [jsonData objectForKey:@"firstname"];
-            NSLog(@"%@",first);
-            NSString *img = [jsonData objectForKey:@"image_profile"];
-            NSString *last = [jsonData objectForKey:@"lastname"];
-            NSLog(@"%@",img);
-            NSString *time = [jsonData objectForKey:@"time_pray"];
-            NSString *friend = [jsonData objectForKey:@"time_pray_friend_percent"];
-            NSString *me = [jsonData objectForKey:@"time_pray_me_percent"];
-            NSString *top = [jsonData objectForKey:@"time_pray_top_percent"];
-
+        NSString *first = [jsonData objectForKey:@"firstname"];
+        NSLog(@"%@",first);
+        NSString *img = [jsonData objectForKey:@"image_profile"];
+        NSString *last = [jsonData objectForKey:@"lastname"];
+        NSLog(@"%@",img);
+        NSString *time = [jsonData objectForKey:@"time_pray"];
+        NSString *friend = [jsonData objectForKey:@"time_pray_friend_percent"];
+        NSString *me = [jsonData objectForKey:@"time_pray_me_percent"];
+        NSString *top = [jsonData objectForKey:@"time_pray_top_percent"];
+        
         [_txtfirstname setText:[NSString stringWithFormat:@"คุณ %@ %@",first,last]];
-//        [_txtlastname setText:[NSString stringWithFormat:@" %@",last]];
+        //        [_txtlastname setText:[NSString stringWithFormat:@" %@",last]];
         [_txttime setText:[NSString stringWithFormat:@"ใช้เวลาสวดมนต์ %@ ชั่วโมง",time]];
         [_txtme setText:[NSString stringWithFormat:@"%@",me]];
         [_txtfriend setText:[NSString stringWithFormat:@"%@",friend]];
         [_txttop setText:[NSString stringWithFormat:@"%@",top]];
         
-         NSString *picURL = [NSString stringWithFormat:@"http://www.codegears.co.th/borkboon/image/%@",img];
+        NSString *picURL = [NSString stringWithFormat:@"http://www.codegears.co.th/borkboon/image/%@",img];
         NSURL *useUrl = [NSURL URLWithString:picURL];
         //    NSData *data = [NSData dataWithContentsOfURL:useUrl];
         //    cell.imageView.image = [UIImage imageWithData:data];
@@ -101,7 +126,7 @@
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error) {
             
             _imgView.image = [UIImage imageWithData:data];
-            }];
+        }];
         
         //me
         float f= [me floatValue];

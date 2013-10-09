@@ -9,11 +9,11 @@
             <objects>
                 <viewController id="Byj-gm-AgH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VHF-zm-H3g">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Introduction_01.png" id="xsw-2H-ovm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
@@ -39,7 +39,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2070" y="-53"/>
+            <point key="canvasLocation" x="-2166" y="-1029"/>
         </scene>
         <!--View Controller - 2 of 4-->
         <scene sceneID="Ghh-Uz-iMg">
@@ -88,7 +88,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1655" y="-53"/>
+            <point key="canvasLocation" x="-1751" y="-1029"/>
         </scene>
         <!--View Controller - 3 of 4-->
         <scene sceneID="Bnf-Y0-wNI">
@@ -137,7 +137,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1259" y="-53"/>
+            <point key="canvasLocation" x="-1355" y="-1029"/>
         </scene>
         <!--View Controller - 4 of 4-->
         <scene sceneID="zd5-dP-XFZ">
@@ -176,7 +176,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-868" y="-53"/>
+            <point key="canvasLocation" x="-964" y="-1029"/>
         </scene>
         <!--Prayer basic View Controller1-->
         <scene sceneID="7dd-J2-aDP">
@@ -238,7 +238,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="684" y="-53"/>
+            <point key="canvasLocation" x="1026" y="-1669"/>
         </scene>
         <!--Menu View Controller - บทสวดมนต์-->
         <scene sceneID="HYM-Sg-x09">
@@ -302,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nlK-AQ-4Z8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="-53"/>
+            <point key="canvasLocation" x="560" y="-1661"/>
         </scene>
         <!--Prayer basic Detail View Controller1-->
         <scene sceneID="NaE-Ou-Xh5">
@@ -536,14 +536,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cgt-pa-9uk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086" y="-53"/>
+            <point key="canvasLocation" x="1440" y="-1669"/>
         </scene>
         <!--Plansprayer View Controller-->
         <scene sceneID="d3Y-ym-XWg">
             <objects>
                 <viewController id="fmu-T7-eSa" customClass="PlansprayerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C7a-es-N45">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_sign-in.png" id="Rvt-Ct-7d1">
@@ -630,14 +630,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6XN-5V-Xw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="630"/>
+            <point key="canvasLocation" x="-1484" y="90"/>
         </scene>
         <!--Sign in View Controller - Sign In-->
         <scene sceneID="MPB-Lt-LLH">
             <objects>
                 <viewController id="43I-cO-8Fx" customClass="Sign_inViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="epS-ms-uPK" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="อีเมลล์" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fd9-ao-P7F">
@@ -682,7 +682,7 @@
                         <barButtonItem key="leftBarButtonItem" title="CANCEL" id="Q1Z-5h-YTB">
                             <color key="tintColor" red="0.156745524" green="0.47174604920000002" blue="0.66414221939999996" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="fmu-T7-eSa" kind="push" id="ov0-Qj-Dls"/>
+                                <action selector="btBackAction:" destination="43I-cO-8Fx" id="Wgx-hT-DqS"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="SIGN IN" id="CAo-hS-IHW">
@@ -699,14 +699,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fad-qP-fcM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="684" y="630"/>
+            <point key="canvasLocation" x="-964" y="478"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8Nc-fC-Zjs">
+            <objects>
+                <navigationController storyboardIdentifier="loginNavigationView" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yqU-mF-HrU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hOZ-Ka-Mbk">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fmu-T7-eSa" kind="relationship" relationship="rootViewController" id="tcX-1K-hUA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cCl-4Q-NzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2080" y="82"/>
         </scene>
         <!--Userplans View Controller1 - แผนการสวด-->
         <scene sceneID="vM7-yA-TTA">
             <objects>
                 <viewController storyboardIdentifier="UserplansView1" id="wyL-ld-Ijm" customClass="UserplansViewController1" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8K4-b2-heQ">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z64-0P-xYO">
@@ -729,7 +744,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gt3-YK-snk">
-                                <rect key="frame" x="0.0" y="55" width="320" height="494"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="401"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -768,7 +783,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibw-7X-HBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086" y="630"/>
+            <point key="canvasLocation" x="582" y="-682"/>
         </scene>
         <!--Userplans View Controller2-->
         <scene sceneID="L5O-sG-pkE">
@@ -837,7 +852,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfM-OR-6Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1475" y="630"/>
+            <point key="canvasLocation" x="1090" y="-690"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jtp-Bx-lwc">
@@ -855,7 +870,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pna-BR-bpG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2518" y="-53"/>
+            <point key="canvasLocation" x="-2614" y="-1029"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ntw-Ye-Z7W">
@@ -876,7 +891,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUt-79-iUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="-53"/>
+            <point key="canvasLocation" x="-493" y="-1021"/>
         </scene>
         <!--Navigation Controller - บทสวดมนต์-->
         <scene sceneID="TVe-pB-JPL">
@@ -895,14 +910,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6yR-nK-JJo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-112" y="-53"/>
+            <point key="canvasLocation" x="48" y="-1653"/>
         </scene>
         <!--Sign up View Controller-->
         <scene sceneID="rdo-zd-3gv">
             <objects>
                 <viewController id="UBO-aT-Z7n" customClass="Sign_upViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X9q-8t-fZU" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="Q6h-Hn-3cP">
@@ -913,7 +928,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="BACK" id="unJ-je-Zpb">
                                             <color key="tintColor" red="0.156745524" green="0.47174604920000002" blue="0.66414221939999996" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <segue destination="fmu-T7-eSa" kind="push" id="lMo-iF-54L"/>
+                                                <action selector="btBackAction:" destination="UBO-aT-Z7n" id="OTs-gO-m1S"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="JOIN" id="LWD-Sq-564">
@@ -1029,7 +1044,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXd-ec-88U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="640"/>
+            <point key="canvasLocation" x="-964" y="-206"/>
         </scene>
         <!--Info View Controller - ข้อมูลส่วนตัว-->
         <scene sceneID="51t-z0-i7E">
@@ -1266,7 +1281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hD1-Ym-MWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-112" y="2040"/>
+            <point key="canvasLocation" x="416" y="1344"/>
         </scene>
         <!--Info Table View Controller-->
         <scene sceneID="sJO-Ig-Ksb">
@@ -1310,7 +1325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4A-6q-vQq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="275" y="2040"/>
+            <point key="canvasLocation" x="803" y="1344"/>
         </scene>
         <!--Info2 View Controller-->
         <scene sceneID="DNy-FR-qYO">
@@ -1339,7 +1354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StD-XH-rKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="2708"/>
+            <point key="canvasLocation" x="1228" y="2012"/>
         </scene>
         <!--Info1 View Controller-->
         <scene sceneID="ef7-kD-hYU">
@@ -1364,7 +1379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CMd-u2-b6h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="2040"/>
+            <point key="canvasLocation" x="1228" y="1344"/>
         </scene>
         <!--Calenda View Controller - ปฎิทิน-->
         <scene sceneID="xuB-ic-Yl4">
@@ -1428,7 +1443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gd9-jx-76a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="1310"/>
+            <point key="canvasLocation" x="43" y="466"/>
         </scene>
         <!--Navigation Controller - ข้อมูลส่วนตัว-->
         <scene sceneID="I6x-fJ-MNp">
@@ -1447,7 +1462,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Wp-IT-Yya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-501" y="2032"/>
+            <point key="canvasLocation" x="27" y="1336"/>
         </scene>
         <!--Userplans Check View Controller - แผนการสวด-->
         <scene sceneID="skb-rQ-lz5">
@@ -1516,7 +1531,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iyQ-9g-n3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1475" y="-53"/>
+            <point key="canvasLocation" x="1819" y="-1669"/>
         </scene>
         <!--Userplant Detail-->
         <scene sceneID="9TQ-aP-RAr">
@@ -1720,7 +1735,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGK-f5-6Sw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1860" y="630"/>
+            <point key="canvasLocation" x="1475" y="-690"/>
         </scene>
         <!--Setting View Controller - ตั้งค่าการสวดมนต์-->
         <scene sceneID="OQa-YF-cAG">
@@ -1896,7 +1911,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvh-tv-U0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2256" y="630"/>
+            <point key="canvasLocation" x="1736" y="1382"/>
         </scene>
         <!--Plantime-->
         <scene sceneID="Wnu-qZ-evB">
@@ -1984,7 +1999,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EyA-OB-s4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2656" y="630"/>
+            <point key="canvasLocation" x="2136" y="1382"/>
         </scene>
         <!--Repeat Time View Controller-->
         <scene sceneID="Bv5-fm-Oyc">
@@ -2024,7 +2039,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWT-og-n0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3028" y="630"/>
+            <point key="canvasLocation" x="2508" y="1382"/>
         </scene>
         <!--Navigation Controller - แผนการสวดมนต์-->
         <scene sceneID="5wq-uy-K9C">
@@ -2038,12 +2053,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="fmu-T7-eSa" kind="relationship" relationship="rootViewController" id="7ZG-kK-XpS"/>
+                        <segue destination="wyL-ld-Ijm" kind="relationship" relationship="rootViewController" id="uhX-eF-DD0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GbL-jb-2lR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-112" y="640"/>
+            <point key="canvasLocation" x="54" y="-674"/>
         </scene>
     </scenes>
     <resources>
@@ -2074,10 +2089,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="t1x-O8-HBd"/>
+        <segue reference="L8r-VN-kvH"/>
         <segue reference="o4g-zf-0Mp"/>
-        <segue reference="ov0-Qj-Dls"/>
-        <segue reference="Ahf-8C-rcA"/>
+        <segue reference="gR6-ji-TFL"/>
         <segue reference="L0I-hh-J66"/>
     </inferredMetricsTieBreakers>
 </document>

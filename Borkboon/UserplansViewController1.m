@@ -12,6 +12,7 @@
 #import "SBJson.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
 
 @interface UserplansViewController1 ()
 {
@@ -46,6 +47,28 @@
 //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    NSLog(@"ID%@",_userId);
     
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.loginState == LSTATE_LOGOUT || app.loginState == LSTATE_NOT_LOGIN) {
+        
+        // Create login view
+        UIViewController* view = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNavigationView"];
+        [self presentViewController:view animated:YES completion:nil];
+        
+    }
+    else if(app.loginState == LSTATE_LOGIN_EMAIL){
+        self.userId = app.userID;
+        [self LoadData];
+    }
+    else if(app.loginState == LSTATE_LOGIN_FACEBOOK){
+        [self LoadData];
+    }
+}
+
+- (void) LoadData{
     NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=select&id=&title=",_userId];
     NSLog(@"PostData: %@",post);
     
@@ -80,24 +103,24 @@
     if ([response statusCode] >=200 && [response statusCode] <300)
     {
         NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-//        NSLog(@"Response ==> %@", responseData);
+        //        NSLog(@"Response ==> %@", responseData);
         
         SBJsonParser *jsonParser = [SBJsonParser new];
         NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
         NSLog(@"%@",jsonData);
         
         for (NSDictionary *get in jsonData)
-            {
+        {
             NSString *row_id = [get objectForKey:@"row_id"];
             NSLog(@"%@",row_id);
             NSString *title = [get objectForKey:@"title"];
             NSLog(@"%@",title);
             
-                dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                        row_id, uId,
-                        title, titleName,
-                        nil];
-                [allObject addObject:dict];
+            dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                    row_id, uId,
+                    title, titleName,
+                    nil];
+            [allObject addObject:dict];
         }
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
         [self.myTab reloadData];
