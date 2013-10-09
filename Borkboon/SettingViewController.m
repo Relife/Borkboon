@@ -194,7 +194,6 @@ AppDelegate *appDelegate;
      */
 }
 
-
 - (IBAction)DoneBt:(id)sender {
     if (![_planNameLabel.text isEqualToString:@""] ) {
     AppDelegate *appDelegate = [[AppDelegate alloc] init];
@@ -210,6 +209,8 @@ AppDelegate *appDelegate;
 
     [[appDelegate managedObjectContext] save:nil];
     }
+    
+    
 }
 
 - (IBAction)Swchang:(id)sender {
