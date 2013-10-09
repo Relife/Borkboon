@@ -50,6 +50,7 @@
         [self LoadData];
     }
     else if(app.loginState == LSTATE_LOGIN_FACEBOOK){
+        uid = app.userID;
         [self LoadData];
     }
 }

@@ -75,6 +75,8 @@
     [[self CollectionView]setDataSource:self];
     [[self CollectionView]setDelegate:self];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(defaultTap) name:@"EXIT_LOGIN" object:nil];
+    
 //    arrDes = [[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",nil];
 //    arrImage = [[NSArray alloc]initWithObjects:@"pic_chapter-prayers.png",@"pic_compassionate.png",@"pic_prayer-basis.png",@"pic_psalm.png", nil];
     
@@ -141,6 +143,11 @@
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
     }
 }
+
+- (void) defaultTap{
+    [self.tabBarController setSelectedIndex:0];
+}
+
 
 //DataSource and delegate method
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

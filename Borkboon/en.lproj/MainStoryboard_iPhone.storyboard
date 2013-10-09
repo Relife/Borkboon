@@ -543,7 +543,7 @@
             <objects>
                 <viewController id="fmu-T7-eSa" customClass="PlansprayerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C7a-es-N45">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg_sign-in.png" id="Rvt-Ct-7d1">
@@ -599,6 +599,21 @@
                                     <segue destination="UBO-aT-Z7n" kind="push" id="YPK-nY-JOi"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gWr-5c-jWS">
+                                <rect key="frame" x="19" y="496" width="280" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="ยกเลิก">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitBt:" destination="fmu-T7-eSa" eventType="touchUpInside" id="X0Y-tV-a7h"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="เข้าใช้งานด้วย facebook account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="urw-tq-1bL">
                                 <rect key="frame" x="20" y="149" width="279" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -624,6 +639,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="klG-FB-ShA"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="btlogin" destination="EeI-s1-TuR" id="N9D-Uj-2LD"/>
                     </connections>
@@ -637,7 +653,7 @@
             <objects>
                 <viewController id="43I-cO-8Fx" customClass="Sign_inViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="epS-ms-uPK" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="อีเมลล์" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fd9-ao-P7F">
@@ -917,7 +933,7 @@
             <objects>
                 <viewController id="UBO-aT-Z7n" customClass="Sign_upViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X9q-8t-fZU" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="Q6h-Hn-3cP">

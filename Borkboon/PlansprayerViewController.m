@@ -65,6 +65,8 @@
                     
                     
                     [self updateView];
+                    
+                    
                 }];
             }
         }
@@ -84,6 +86,17 @@
         // valid account UI is shown whenever the session is open
         
         [self.btlogin setTitle:@"  Log out" forState:UIControlStateNormal];
+        [FBSession setActiveSession:appDelegate.session];
+        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            
+            NSString* uid = [[result objectForKey:@"id"] copy];
+            [appDelegate setUserID:uid];
+            [appDelegate setLoginState:LSTATE_LOGIN_FACEBOOK];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        
         
     } else {
         // login-needed account UI is shown whenever the session is closed
@@ -133,6 +146,11 @@
     [super viewDidUnload];
 }
 - (IBAction)exitBt:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion: ^{
+        
+    }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"EXIT_LOGIN" object:nil];
+    
 }
 @end
