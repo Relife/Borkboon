@@ -16,5 +16,6 @@
 - (IBAction)bgClick:(id)sender;
 - (IBAction)DoneBt:(id)sender;
 @property (strong, nonatomic) NSString *Date;
+@property (strong, nonatomic) NSDate *nsDate;
 
 @end

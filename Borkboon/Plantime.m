@@ -38,6 +38,7 @@
     if([_editStartDate isFirstResponder]){
         UIDatePicker *picker = (UIDatePicker*)_editStartDate.inputView;
         _editStartDate.text = [NSDateFormatter localizedStringFromDate:[picker date] dateStyle:kCFDateFormatterShortStyle timeStyle:kCFDateFormatterShortStyle];
+        _nsDate = [picker date];
     }
 }
 
@@ -49,8 +50,10 @@
     _Date = _editStartDate.text;
     NSLog(@"%@",_Date);
     
-    NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:_Date, @"Time", nil];
+    NSDictionary *itemDetails = [[NSDictionary alloc] initWithObjectsAndKeys:_Date, @"Time",nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SentTime" object:itemDetails];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SentDateTime" object:_nsDate];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

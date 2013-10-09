@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString *timeStart;
 @property (strong, nonatomic) NSString *getUserId;
 @property (strong, nonatomic) NSString *switchValue;
+@property (strong, nonatomic) NSDate *dateTime;
 
 - (IBAction)DoneBt:(id)sender;
 @property (strong, nonatomic) IBOutlet UISwitch *snoozeSw;

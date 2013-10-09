@@ -53,8 +53,11 @@ AppDelegate *appDelegate;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(sentTime:)
                                                  name:@"SentTime"
-                                               object:nil]; 
-
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sentDateTime:)
+                                                 name:@"SentDateTime"
+                                               object:nil];
     appDelegate = [[AppDelegate alloc] init];
     if (_dataRecords == nil) {
         _dataRecords = [[NSMutableArray alloc] init];
@@ -107,10 +110,15 @@ AppDelegate *appDelegate;
 - (void)sentTime:(NSNotification *)notification {
     NSLog(@"%@", notification.object);
     NSLog(@"%@", [notification.object objectForKey:@"Time"]);
+    NSLog(@"%@", [notification.object objectForKey:@"nsDate"]);
     _timeStart = [notification.object objectForKey:@"Time"];
     _timeStartLabel.text = _timeStart;
 }
 
+- (void)sentDateTime:(NSNotification *)notification {
+    NSLog(@"%@", notification.object);
+    _dateTime = notification.object;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -210,7 +218,8 @@ AppDelegate *appDelegate;
     }
     
     UILocalNotification *notif = [[UILocalNotification alloc] init];
-//    notif.fireDate = [datePicker date];
+    
+    notif.fireDate = _dateTime;
     notif.timeZone = [NSTimeZone defaultTimeZone];
     
     notif.alertBody = @"Did you forget something?";
@@ -224,18 +233,20 @@ AppDelegate *appDelegate;
     else if ([_getRepeat isEqual: @"ทุกสัปดาห์"]){
         notif.repeatInterval = NSWeekCalendarUnit;
     }
-    else if ([_getRepeat isEqual: @"ทุก 2 สัปดาห์"]){
-        
-    }
     else if ([_getRepeat isEqual: @"ทุกเดือน"]){
-        
+        notif.repeatInterval = NSMonthCalendarUnit;
     }
     else if ([_getRepeat isEqual: @"ทุกปี"]){
-        
+        notif.repeatInterval = NSYearCalendarUnit;
     }
     else{
         notif.repeatInterval = 0;
     }
+    NSDictionary *userDict = [NSDictionary dictionaryWithObject:@"someValue"
+                                                         forKey:@"someKey"];
+    notif.userInfo = userDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
 }
 
 - (IBAction)Swchang:(id)sender {
