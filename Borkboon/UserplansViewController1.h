@@ -17,4 +17,6 @@
 - (IBAction)editbt:(id)sender;
 
 @property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *idSelect;
+
 @end

@@ -206,11 +206,36 @@ AppDelegate *appDelegate;
     [p setValue:_repeatLabel.text forKey:@"repeat"];
     [p setValue:_switchValue forKey:@"snooze"];
     [p setValue:_timeStartLabel.text forKey:@"startTime"];
-
     [[appDelegate managedObjectContext] save:nil];
     }
     
+    UILocalNotification *notif = [[UILocalNotification alloc] init];
+//    notif.fireDate = [datePicker date];
+    notif.timeZone = [NSTimeZone defaultTimeZone];
     
+    notif.alertBody = @"Did you forget something?";
+    notif.alertAction = @"Show me";
+    notif.soundName = UILocalNotificationDefaultSoundName;
+    notif.applicationIconBadgeNumber = 1;
+    
+    if ([_getRepeat isEqual: @"ทุกวัน"]) {
+        notif.repeatInterval = NSDayCalendarUnit;
+    }
+    else if ([_getRepeat isEqual: @"ทุกสัปดาห์"]){
+        notif.repeatInterval = NSWeekCalendarUnit;
+    }
+    else if ([_getRepeat isEqual: @"ทุก 2 สัปดาห์"]){
+        
+    }
+    else if ([_getRepeat isEqual: @"ทุกเดือน"]){
+        
+    }
+    else if ([_getRepeat isEqual: @"ทุกปี"]){
+        
+    }
+    else{
+        notif.repeatInterval = 0;
+    }
 }
 
 - (IBAction)Swchang:(id)sender {
