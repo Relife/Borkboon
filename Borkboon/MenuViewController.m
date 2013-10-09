@@ -47,6 +47,31 @@
 {
     [super viewDidLoad];
     
+    //tab bar custom image
+    
+    UIImage *selectedImage0 = [UIImage imageNamed:@"icon_prayer_blue.png"];
+    UIImage *unselectedImage0 = [UIImage imageNamed:@"icon_prayer_white.png"];
+    
+    UIImage *selectedImage1 = [UIImage imageNamed:@"icon_plans-prayer_blue.png"];
+    UIImage *unselectedImage1 = [UIImage imageNamed:@"icon_plans-prayer_white.png"];
+    
+    UIImage *selectedImage2 = [UIImage imageNamed:@"icon_calendar_blue.png"];
+    UIImage *unselectedImage2 = [UIImage imageNamed:@"icon_calendar_white.png"];
+    
+    UIImage *selectedImage3 = [UIImage imageNamed:@"icon_profile_blue.png"];
+    UIImage *unselectedImage3 = [UIImage imageNamed:@"icon_profile_white.png"];
+    
+    UITabBar *tabBar = self.tabBarController.tabBar;
+    UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
+    UITabBarItem *item3 = [tabBar.items objectAtIndex:3];
+    
+    [item0 setFinishedSelectedImage:selectedImage0 withFinishedUnselectedImage:unselectedImage0];
+    [item1 setFinishedSelectedImage:selectedImage1 withFinishedUnselectedImage:unselectedImage1];
+    [item2 setFinishedSelectedImage:selectedImage2 withFinishedUnselectedImage:unselectedImage2];
+    [item3 setFinishedSelectedImage:selectedImage3 withFinishedUnselectedImage:unselectedImage3];
+    
     [[self CollectionView]setDataSource:self];
     [[self CollectionView]setDelegate:self];
     

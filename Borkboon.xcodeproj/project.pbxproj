@@ -194,6 +194,16 @@
 		E1C5EDBF1803F88D00F3208A /* icon_moon ~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E1C5EDBC1803F88D00F3208A /* icon_moon ~ipad.png */; };
 		E1C5EDC01803F88D00F3208A /* icon_stopwatch ~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E1C5EDBD1803F88D00F3208A /* icon_stopwatch ~ipad.png */; };
 		E1C5EDC918041A5200F3208A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C5EDC818041A5200F3208A /* User.m */; };
+		E1E0E55F1805D0BF0097DD5A /* icon_calendar_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5571805D0BF0097DD5A /* icon_calendar_blue.png */; };
+		E1E0E5601805D0BF0097DD5A /* icon_calendar_white.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5581805D0BF0097DD5A /* icon_calendar_white.png */; };
+		E1E0E5611805D0BF0097DD5A /* icon_plans-prayer_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5591805D0BF0097DD5A /* icon_plans-prayer_blue.png */; };
+		E1E0E5621805D0BF0097DD5A /* icon_plans-prayer_white.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E55A1805D0BF0097DD5A /* icon_plans-prayer_white.png */; };
+		E1E0E5631805D0BF0097DD5A /* icon_prayer_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E55B1805D0BF0097DD5A /* icon_prayer_blue.png */; };
+		E1E0E5641805D0BF0097DD5A /* icon_prayer_white.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E55C1805D0BF0097DD5A /* icon_prayer_white.png */; };
+		E1E0E5651805D0BF0097DD5A /* icon_profile_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E55D1805D0BF0097DD5A /* icon_profile_blue.png */; };
+		E1E0E5661805D0BF0097DD5A /* icon_profile_white.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E55E1805D0BF0097DD5A /* icon_profile_white.png */; };
+		E1E0E5681805D64E0097DD5A /* bar_down.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5671805D64D0097DD5A /* bar_down.png */; };
+		E1E0E56A1805D7F50097DD5A /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5691805D7F50097DD5A /* bar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -430,6 +440,16 @@
 		E1C5EDBD1803F88D00F3208A /* icon_stopwatch ~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_stopwatch ~ipad.png"; sourceTree = "<group>"; };
 		E1C5EDC718041A5100F3208A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = ../User.h; sourceTree = "<group>"; };
 		E1C5EDC818041A5200F3208A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = ../User.m; sourceTree = "<group>"; };
+		E1E0E5571805D0BF0097DD5A /* icon_calendar_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_blue.png; sourceTree = "<group>"; };
+		E1E0E5581805D0BF0097DD5A /* icon_calendar_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_calendar_white.png; sourceTree = "<group>"; };
+		E1E0E5591805D0BF0097DD5A /* icon_plans-prayer_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_plans-prayer_blue.png"; sourceTree = "<group>"; };
+		E1E0E55A1805D0BF0097DD5A /* icon_plans-prayer_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_plans-prayer_white.png"; sourceTree = "<group>"; };
+		E1E0E55B1805D0BF0097DD5A /* icon_prayer_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_prayer_blue.png; sourceTree = "<group>"; };
+		E1E0E55C1805D0BF0097DD5A /* icon_prayer_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_prayer_white.png; sourceTree = "<group>"; };
+		E1E0E55D1805D0BF0097DD5A /* icon_profile_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_profile_blue.png; sourceTree = "<group>"; };
+		E1E0E55E1805D0BF0097DD5A /* icon_profile_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_profile_white.png; sourceTree = "<group>"; };
+		E1E0E5671805D64D0097DD5A /* bar_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar_down.png; sourceTree = "<group>"; };
+		E1E0E5691805D7F50097DD5A /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -719,6 +739,16 @@
 		E180C9AA17C9459200D1D154 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				E1E0E5691805D7F50097DD5A /* bar.png */,
+				E1E0E5671805D64D0097DD5A /* bar_down.png */,
+				E1E0E5571805D0BF0097DD5A /* icon_calendar_blue.png */,
+				E1E0E5581805D0BF0097DD5A /* icon_calendar_white.png */,
+				E1E0E5591805D0BF0097DD5A /* icon_plans-prayer_blue.png */,
+				E1E0E55A1805D0BF0097DD5A /* icon_plans-prayer_white.png */,
+				E1E0E55B1805D0BF0097DD5A /* icon_prayer_blue.png */,
+				E1E0E55C1805D0BF0097DD5A /* icon_prayer_white.png */,
+				E1E0E55D1805D0BF0097DD5A /* icon_profile_blue.png */,
+				E1E0E55E1805D0BF0097DD5A /* icon_profile_white.png */,
 				E1C5EDB51803F85300F3208A /* icon_fullmoon.png */,
 				E1C5EDB61803F85300F3208A /* icon_moon.png */,
 				E1C5EDB71803F85300F3208A /* icon_stopwatch.png */,
@@ -1016,6 +1046,16 @@
 				E1C5EDBE1803F88D00F3208A /* icon_fullmoon ~ipad.png in Resources */,
 				E1C5EDBF1803F88D00F3208A /* icon_moon ~ipad.png in Resources */,
 				E1C5EDC01803F88D00F3208A /* icon_stopwatch ~ipad.png in Resources */,
+				E1E0E55F1805D0BF0097DD5A /* icon_calendar_blue.png in Resources */,
+				E1E0E5601805D0BF0097DD5A /* icon_calendar_white.png in Resources */,
+				E1E0E5611805D0BF0097DD5A /* icon_plans-prayer_blue.png in Resources */,
+				E1E0E5621805D0BF0097DD5A /* icon_plans-prayer_white.png in Resources */,
+				E1E0E5631805D0BF0097DD5A /* icon_prayer_blue.png in Resources */,
+				E1E0E5641805D0BF0097DD5A /* icon_prayer_white.png in Resources */,
+				E1E0E5651805D0BF0097DD5A /* icon_profile_blue.png in Resources */,
+				E1E0E5661805D0BF0097DD5A /* icon_profile_white.png in Resources */,
+				E1E0E5681805D64E0097DD5A /* bar_down.png in Resources */,
+				E1E0E56A1805D7F50097DD5A /* bar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

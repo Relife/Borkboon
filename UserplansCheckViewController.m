@@ -11,6 +11,7 @@
 #import "UserplansViewController2.h"
 #import "Sign-inViewController.h"
 #import "SBJson.h"
+#import "AppDelegate.h"
 
 @interface UserplansCheckViewController ()
 {
@@ -39,9 +40,25 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void) viewWillAppear:(BOOL)animated{
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.loginState == LSTATE_LOGOUT || app.loginState == LSTATE_NOT_LOGIN) {
+        
+        // Create login view
+        UIViewController* view = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNavigationView"];
+        [self presentViewController:view animated:YES completion:nil];
+        
+    }
+    else if(app.loginState == LSTATE_LOGIN_EMAIL){
+        self.userId = app.userID;
+        [self LoadData];
+    }
+    else if(app.loginState == LSTATE_LOGIN_FACEBOOK){
+        [self LoadData];
+    }
+}
+
+- (void) LoadData{
     NSString *post =[[NSString alloc] initWithFormat:@"user_id=18&method=select&id=&title="];
     NSLog(@"PostData: %@",post);
     
@@ -98,6 +115,67 @@
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
         [self.myTab reloadData];
     }
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+//    NSString *post =[[NSString alloc] initWithFormat:@"user_id=18&method=select&id=&title="];
+//    NSLog(@"PostData: %@",post);
+//    
+//    NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
+//    
+//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+//    
+//    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setURL:url];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:postData];
+//    
+//    //            [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+//    
+//    NSError *error = [[NSError alloc] init];
+//    NSHTTPURLResponse *response = nil;
+//    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    
+//    // Define keys
+//    uId = @"id";
+//    titleName = @"title";
+//    
+//    // Create array to hold dictionaries
+//    allObject = [[NSMutableArray alloc] init];
+//    
+//    NSLog(@"Response code: %d", [response statusCode]);
+//    if ([response statusCode] >=200 && [response statusCode] <300)
+//    {
+//        NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+//        //        NSLog(@"Response ==> %@", responseData);
+//        
+//        SBJsonParser *jsonParser = [SBJsonParser new];
+//        NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+//        NSLog(@"%@",jsonData);
+//        
+//        for (NSDictionary *get in jsonData)
+//        {
+//            NSString *row_id = [get objectForKey:@"row_id"];
+//            NSLog(@"%@",row_id);
+//            NSString *title = [get objectForKey:@"title"];
+//            NSLog(@"%@",title);
+//            
+//            dict = [NSDictionary dictionaryWithObjectsAndKeys:
+//                    row_id, uId,
+//                    title, titleName,
+//                    nil];
+//            [allObject addObject:dict];
+//        }
+//        displayObject =[[NSMutableArray alloc] initWithArray:allObject];
+//        [self.myTab reloadData];
+//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
