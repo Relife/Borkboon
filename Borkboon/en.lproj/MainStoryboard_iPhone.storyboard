@@ -1860,6 +1860,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="48a-LI-ISJ">
                                                     <rect key="frame" x="212" y="22" width="79" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="Swchang:" destination="EII-Fv-82g" eventType="valueChanged" id="LcK-VR-hL8"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1887,6 +1890,7 @@
                         <outlet property="nameLabel" destination="Zts-mP-ekC" id="vMD-he-lX2"/>
                         <outlet property="planNameLabel" destination="zKf-r8-JrR" id="69f-Ee-BtL"/>
                         <outlet property="repeatLabel" destination="pc9-7h-1pT" id="Gkx-gZ-KD3"/>
+                        <outlet property="snoozeSw" destination="48a-LI-ISJ" id="una-OU-N0l"/>
                         <outlet property="timeStartLabel" destination="ztw-c7-dVT" id="hby-7f-OrJ"/>
                     </connections>
                 </tableViewController>
@@ -2190,9 +2194,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingViewController.h"/>
             <relationships>
                 <relationship kind="action" name="DoneBt:"/>
+                <relationship kind="action" name="Swchang:"/>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="planNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="repeatLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="snoozeSw" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="timeStartLabel" candidateClass="UILabel"/>
             </relationships>
         </class>

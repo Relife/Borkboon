@@ -35,23 +35,15 @@ AppDelegate *appDelegate;
 
 - (void)viewDidLoad
 {
-    appDelegate = [[AppDelegate alloc] init];
-    if (_dataRecords == nil) {
-        _dataRecords = [[NSMutableArray alloc] init];
+    //valueSw
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+    if([userdefault boolForKey:@"yes"]) {
+        _snoozeSw.on=YES;
+        _switchValue = @"Yes";
+    } else {
+        _snoozeSw.on=NO;
+        _switchValue = @"No";
     }
-    else
-    {
-        [_dataRecords removeAllObjects];
-    }
-    
-    NSArray *t = [self fetchData];
-    
-    for (int i=0; i < [t count]; i++) {
-        [_dataRecords addObject:[t objectAtIndex:i]];
-        User *p = _dataRecords[i];
-        NSLog(@"uId = %@",p.uId);
-    }
-    
     
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -63,10 +55,32 @@ AppDelegate *appDelegate;
                                                  name:@"SentTime"
                                                object:nil]; 
 
+    appDelegate = [[AppDelegate alloc] init];
+    if (_dataRecords == nil) {
+        _dataRecords = [[NSMutableArray alloc] init];
+    }
+    else
+    {
+        [_dataRecords removeAllObjects];
+    }
+    
+    NSArray *t = [self fetchData];
+    
+    
+    for (int i=0; i < [t count]; i++) {
+        [_dataRecords addObject:[t objectAtIndex:i]];
+        User *p = _dataRecords[i];
+        NSLog(@"uId = %@",p.uId);
+        NSLog(@"planName = %@",p.planName);
+        NSLog(@"prayName = %@",p.prayName);
+        NSLog(@"startTime = %@",p.startTime);
+        NSLog(@"repeat = %@",p.repeat);
+        NSLog(@"snooze = %@",p.snooze);        
+    }
     _nameLabel.text = _getName;
     _planNameLabel.text = _getPlanName;
-//    _timeStartLabel.text = _timeStart;
-//    _repeatLabel.text = _getRepeat;
+    _timeStartLabel.text = _timeStart;
+    _repeatLabel.text = _getRepeat;
 }
 
 -(NSArray *) fetchData
@@ -80,7 +94,6 @@ AppDelegate *appDelegate;
     NSArray *listData = [[appDelegate managedObjectContext
                           ] executeFetchRequest:request error:nil];
 
-        
     return listData;
 }
 
@@ -181,6 +194,7 @@ AppDelegate *appDelegate;
      */
 }
 
+
 - (IBAction)DoneBt:(id)sender {
     if (![_planNameLabel.text isEqualToString:@""] ) {
     AppDelegate *appDelegate = [[AppDelegate alloc] init];
@@ -188,10 +202,24 @@ AppDelegate *appDelegate;
     NSManagedObject *p = [NSEntityDescription
                           insertNewObjectForEntityForName:@"User" inManagedObjectContext:[appDelegate managedObjectContext]];
     [p setValue:_getUserId forKey:@"uId"];
-//    [p setValue:_nameLabel.text forKey:@"user"];
-    
+    [p setValue:_planNameLabel.text forKey:@"planName"];
+    [p setValue:_nameLabel.text forKey:@"prayName"];
+    [p setValue:_repeatLabel.text forKey:@"repeat"];
+    [p setValue:_switchValue forKey:@"snooze"];
+    [p setValue:_timeStartLabel.text forKey:@"startTime"];
+
     [[appDelegate managedObjectContext] save:nil];
     }
 }
 
+- (IBAction)Swchang:(id)sender {
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+    if (_snoozeSw.on) {
+        [userdefault setBool:YES forKey:@"yes"];
+        _switchValue = @"Yes";
+    } else {
+        [userdefault setBool:NO forKey:@"no"];
+        _switchValue = @"No";
+    }
+}
 @end
