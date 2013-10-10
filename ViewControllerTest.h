@@ -17,6 +17,10 @@
 - (IBAction)CloseBt:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *myTab;
 @property (strong,nonatomic) NSArray *results;
+@property (strong,nonatomic) NSString *totalPage;
+
+- (IBAction)readMore:(id)sender;
+- (IBAction)Back:(id)sender;
 
 
 @end

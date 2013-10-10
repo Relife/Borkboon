@@ -24,6 +24,7 @@
     // Define keys
     NSString *uId;
     NSString *titleName;
+    NSString *haveScript;
     int selectedIndex;
 }
 
@@ -38,6 +39,11 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -59,10 +65,10 @@
 }
 
 - (void) LoadData{
-    NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=select&id=&title=",_userId];
+    NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&pray_script_id=%@&method=select",_userId,_prayScriptId];
     NSLog(@"PostData: %@",post);
     
-    NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
+    NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/scriptToMainStorage.php"];
     
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
@@ -85,7 +91,8 @@
     // Define keys
     uId = @"id";
     titleName = @"title";
-    
+    haveScript = @"havescript";
+
     // Create array to hold dictionaries
     allObject = [[NSMutableArray alloc] init];
     
@@ -105,77 +112,19 @@
             NSLog(@"%@",row_id);
             NSString *title = [get objectForKey:@"title"];
             NSLog(@"%@",title);
-            
+            NSString *havescript = [get objectForKey:@"havescript"];
+            NSLog(@"%@",havescript);
+
             dict = [NSDictionary dictionaryWithObjectsAndKeys:
                     row_id, uId,
                     title, titleName,
+                    havescript, haveScript,
                     nil];
             [allObject addObject:dict];
         }
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
         [self.myTab reloadData];
     }
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-//    NSString *post =[[NSString alloc] initWithFormat:@"user_id=18&method=select&id=&title="];
-//    NSLog(@"PostData: %@",post);
-//    
-//    NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
-//    
-//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//    
-//    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-//    
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    [request setURL:url];
-//    [request setHTTPMethod:@"POST"];
-//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    [request setHTTPBody:postData];
-//    
-//    //            [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-//    
-//    NSError *error = [[NSError alloc] init];
-//    NSHTTPURLResponse *response = nil;
-//    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    
-//    // Define keys
-//    uId = @"id";
-//    titleName = @"title";
-//    
-//    // Create array to hold dictionaries
-//    allObject = [[NSMutableArray alloc] init];
-//    
-//    NSLog(@"Response code: %d", [response statusCode]);
-//    if ([response statusCode] >=200 && [response statusCode] <300)
-//    {
-//        NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-//        //        NSLog(@"Response ==> %@", responseData);
-//        
-//        SBJsonParser *jsonParser = [SBJsonParser new];
-//        NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
-//        NSLog(@"%@",jsonData);
-//        
-//        for (NSDictionary *get in jsonData)
-//        {
-//            NSString *row_id = [get objectForKey:@"row_id"];
-//            NSLog(@"%@",row_id);
-//            NSString *title = [get objectForKey:@"title"];
-//            NSLog(@"%@",title);
-//            
-//            dict = [NSDictionary dictionaryWithObjectsAndKeys:
-//                    row_id, uId,
-//                    title, titleName,
-//                    nil];
-//            [allObject addObject:dict];
-//        }
-//        displayObject =[[NSMutableArray alloc] initWithArray:allObject];
-//        [self.myTab reloadData];
-//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -197,16 +146,17 @@
     NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
     
     NSString *cellValue = [tmpDict objectForKey:titleName];
+    NSString *script = [tmpDict objectForKey:haveScript];
     cell.textLabel.text = cellValue;
     
-//    if(indexPath.row == selectedIndex)
-//    {
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//    }
-//    else
-//    {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
+    if([script isEqual: @"True"])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
 }
 
@@ -222,7 +172,7 @@
     NSString *name = [tmpDict objectForKey:titleName];
     NSLog(@"name:%@",name);
     
-    NSString *post =[[NSString alloc] initWithFormat:@"user_id=18&method=delete&id=%@&title=",ID];
+    NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=delete&id=%@&title=",_userId,ID];
     NSLog(@"PostData: %@",post);
     
     NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
@@ -277,6 +227,7 @@
         }
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
         [self.myTab reloadData];
+        [self LoadData];
     }
 }
 
@@ -313,7 +264,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
     UITextField* textfield = [alertView textFieldAtIndex:0];
     NSLog(@"Save. text: %@", textfield.text);
     
-    NSString *post =[[NSString alloc] initWithFormat:@"user_id=18&method=insert&id=&title=%@",textfield.text];
+    NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=insert&id=&title=%@",_userId,textfield.text];
     NSLog(@"PostData: %@",post);
     
     NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
@@ -359,7 +310,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
             NSLog(@"%@",row_id);
             NSString *title = [get objectForKey:@"title"];
             NSLog(@"%@",title);
-            
+                    
             dict = [NSDictionary dictionaryWithObjectsAndKeys:
                     row_id, uId,
                     title, titleName,
@@ -368,6 +319,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         }
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
         [self.myTab reloadData];
+        [self LoadData];
     }
 }
 
@@ -482,6 +434,7 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
             [self.myTab reloadData];
         }
         [tableView reloadData];
+        [self LoadData];
     }
     else {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ไม่สามารถเพิ่มเข้ารายการได้"
