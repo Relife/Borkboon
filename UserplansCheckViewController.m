@@ -59,7 +59,7 @@
 }
 
 - (void) LoadData{
-    NSString *post =[[NSString alloc] initWithFormat:@"user_id=18&method=select&id=&title="];
+    NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=select&id=&title=",_userId];
     NSLog(@"PostData: %@",post);
     
     NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
