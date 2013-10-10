@@ -26,6 +26,7 @@
     NSString *Prayloop;
     NSTimer *Timer;
     NSString *stopt;
+    
 }
 @property (nonatomic, strong) NSMutableData *responseData;
 @end
@@ -35,7 +36,7 @@ static float testOffset = 0;
 float speed = 1.0;
 float current;
 @synthesize responseData = _responseData;
-
+Boolean isPlaying = NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,7 +78,6 @@ float current;
     self.navigationItem.rightBarButtonItems =
     [NSArray arrayWithObjects:PraylistBt,ShareBt,nil];
     
-    
     self.title = _titleName;
 //    NSLog(@"%@",_titleId);
     self.responseData = [NSMutableData data];
@@ -97,7 +97,7 @@ float current;
         UIAlertView *connectFailMessage = [[UIAlertView alloc] initWithTitle:@"NSURLConnection " message:@"Failed in viewDidLoad"  delegate: self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [connectFailMessage show];
     }
-    
+    self.webView1.scrollView.delegate = self;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -239,12 +239,21 @@ float current;
     [_webView1 stringByEvaluatingJavaScriptFromString:jsString];
 }
 
-
 - (IBAction)playBt:(id)sender {
 //    CGPoint bottomOffset = CGPointMake(0, self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height);
 //    [self.webView1.scrollView setContentOffset:bottomOffset animated:YES];
 //    _btPlay.hidden = YES;
-    Timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(scrollWebview) userInfo:nil repeats:YES];
+    NSString *str = [NSString stringWithFormat:@"Speed %f",speed];
+    NSLog(str);
+    if(!isPlaying) {
+        [_btPlay setImage:[UIImage imageNamed:@"button_no"] forState:UIControlStateNormal];
+        Timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(scrollWebview) userInfo:nil repeats:YES];
+       
+    }else{
+        [_btPlay setImage:[UIImage imageNamed:@"button_play"] forState:UIControlStateNormal];
+         [self pausePray];
+    }
+    isPlaying = !isPlaying;
 }
 
 
@@ -261,19 +270,45 @@ float current;
 }
 
 - (IBAction)pauseBt:(id)sender {
-    speed = 0.0;
-//    _btPlay.hidden = NO;
-//    _btPause.hidden = YES;
-    if (Timer) {
-        [Timer invalidate];
-        Timer = nil;
+    [self pausePray];
+}
+
+//scroll view delegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    NSLog(@"testOffset %f and height %f",self.webView1.scrollView.contentOffset.y,self.webView1.scrollView.bounds.size.height);
+    if(self.webView1.scrollView.contentOffset.y>=self.webView1.scrollView.bounds.size.height)
+    {
+        [self stopPray ];
     }
+    
+}
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    testOffset=self.webView1.scrollView.contentOffset.y;
+    NSString *str = [NSString stringWithFormat:@"scrollViewDidEndDecelerating : testOffset %f",testOffset];
+    NSLog(str);
+}
+-(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    
+    testOffset=self.webView1.scrollView.contentOffset.y;
+    if(testOffset>=self.webView1.scrollView.bounds.size.height)
+    {
+        [self stopPray ];
+        [self.webView1.scrollView setContentOffset:CGPointMake(0, self.webView1.scrollView.contentOffset.y) animated:YES];
+    }
+    else if(testOffset<=0){
+        testOffset=0;
+    }
+    testOffset=self.webView1.scrollView.contentOffset.y;
+    NSString *str = [NSString stringWithFormat:@" scrollViewWillEndDragging : testOffset %f",testOffset];
+    NSLog(str);
+    
 }
 
 -(void) scrollWebview{
     //CGPoint bottomOffset = CGPointMake(0, self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height);
-    
 //    static float testOffset = 0;
+    
     CGPoint bottomOffset = CGPointMake(0, testOffset+=speed);
     [self.webView1.scrollView setContentOffset:bottomOffset animated:YES];
     
@@ -290,8 +325,32 @@ float current;
             testOffset = 0;
         }
     }
+}
+
+-(void)stopPray{
+    
+    //CGPoint OffsetStart = CGPointMake(0, 0);
+    //[self.webView1.scrollView setContentOffset:OffsetStart animated:YES];
+    if (Timer) {
+        [Timer invalidate];
+        Timer = nil;
+    }
+}
+
+-(void)pausePray{
+   // speed = 0.0;
+    //    _btPlay.hidden = NO;
+    //    _btPause.hidden = YES;
+    if (Timer) {
+        [Timer invalidate];
+        Timer = nil;
+    }
+}
 
 
+-(void) viewDidDisappear:(BOOL)animated{
+    // stop pray when view disappear
+    [self stopPray];
 }
 
 @end

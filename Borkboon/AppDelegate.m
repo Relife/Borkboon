@@ -106,25 +106,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    application.applicationIconBadgeNumber = 0;
-    //Tab bar
-    UIImage* tabBarBackground = [UIImage imageNamed:@"bar_down.png"];
-    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:@{
-                                 UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
-                            UITextAttributeTextColor : [UIColor whiteColor],}
-                                             forState:UIControlStateNormal];
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:@{
-                                 UITextAttributeFont : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
-                            UITextAttributeTextColor : [UIColor colorWithRed:0/255.0 green:45/255.0 blue:80/255.0 alpha:1.0],}
-                                             forState:UIControlStateSelected];
-    
-    //Navbar image
-    UIImage *navBar = [UIImage imageNamed:@"bar.png"];
-    
-    [[UINavigationBar appearance] setBackgroundImage:navBar forBarMetrics:UIBarMetricsDefault];
+  
     return YES;
 }
 							
