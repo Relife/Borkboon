@@ -245,7 +245,7 @@
             <objects>
                 <viewController id="A9M-w9-3GX" customClass="MenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ahl-I1-bqk">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="D3o-Na-nkv">
@@ -737,7 +737,7 @@
             <objects>
                 <viewController storyboardIdentifier="UserplansView1" id="wyL-ld-Ijm" customClass="UserplansViewController1" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8K4-b2-heQ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z64-0P-xYO">
@@ -1067,7 +1067,7 @@
             <objects>
                 <viewController id="Qef-TI-95l" customClass="InfoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9mJ-10-uFJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bg.png" id="x3t-9e-hrd">
