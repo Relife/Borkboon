@@ -11,6 +11,9 @@
 #import "Sign-inViewController.h"
 #import "SBJson.h"
 
+#import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
+
 @interface UserplansViewController1 ()
 {
     NSMutableArray *allObject;
@@ -44,6 +47,29 @@
 //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    NSLog(@"ID%@",_userId);
     
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.loginState == LSTATE_LOGOUT || app.loginState == LSTATE_NOT_LOGIN) {
+        
+        // Create login view
+        UIViewController* view = [self.storyboard instantiateViewControllerWithIdentifier:@"loginNavigationView"];
+        [self presentViewController:view animated:YES completion:nil];
+        
+    }
+    else if(app.loginState == LSTATE_LOGIN_EMAIL){
+        self.userId = app.userID;
+        [self LoadData];
+    }
+    else if(app.loginState == LSTATE_LOGIN_FACEBOOK){
+        self.userId = app.userID;
+        [self LoadData];
+    }
+}
+
+- (void) LoadData{
     NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=select&id=&title=",_userId];
     NSLog(@"PostData: %@",post);
     
@@ -78,24 +104,24 @@
     if ([response statusCode] >=200 && [response statusCode] <300)
     {
         NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-//        NSLog(@"Response ==> %@", responseData);
+        //        NSLog(@"Response ==> %@", responseData);
         
         SBJsonParser *jsonParser = [SBJsonParser new];
         NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
         NSLog(@"%@",jsonData);
         
         for (NSDictionary *get in jsonData)
-            {
+        {
             NSString *row_id = [get objectForKey:@"row_id"];
             NSLog(@"%@",row_id);
             NSString *title = [get objectForKey:@"title"];
             NSLog(@"%@",title);
             
-                dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                        row_id, uId,
-                        title, titleName,
-                        nil];
-                [allObject addObject:dict];
+            dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                    row_id, uId,
+                    title, titleName,
+                    nil];
+            [allObject addObject:dict];
         }
         displayObject =[[NSMutableArray alloc] initWithArray:allObject];
         [self.myTab reloadData];
@@ -123,6 +149,19 @@
     
     NSString *cellValue = [tmpDict objectForKey:titleName];
     cell.textLabel.text = cellValue;
+    
+    if (tableView.isEditing) {
+        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+        [lbl setText:@"edit"];
+        [lbl setTextAlignment:NSTextAlignmentCenter];
+        [lbl setBackgroundColor:[UIColor orangeColor]];
+        [lbl setTextColor:[UIColor whiteColor]];
+        //lbl.layer.borderWidth = 1;
+        [lbl.layer setCornerRadius:10];
+        
+        [cell setEditingAccessoryView:lbl];
+    }
+    
     return cell;
 }
 
@@ -199,16 +238,35 @@
 //selectRow
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserplansViewController2 *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UserplansView2"];
-    
-    NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
-    tvc.getId = [tmpDict objectForKey:uId];
-    tvc.getTitle = [tmpDict objectForKey:titleName];
-    tvc.getUser = _userId;
-    [self.navigationController pushViewController:tvc animated:YES];
-    
+    if (tableView.isEditing) {
+        
+        NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
+        _idSelect = [tmpDict objectForKey:uId];
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"เปลี่ยนชื่อแผนการสวด" message:@"" delegate:self cancelButtonTitle:@"CANCEL" otherButtonTitles:@"OK", nil];
+        [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        [alert show];
+        alert = nil;
+    }
+    else{
+        UserplansViewController2 *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UserplansView2"];
+        
+        NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
+        tvc.getId = [tmpDict objectForKey:uId];
+        tvc.getTitle = [tmpDict objectForKey:titleName];
+        tvc.getUser = _userId;
+        [self.navigationController pushViewController:tvc animated:YES];
+    }
     
 //    [self presentViewController:tvc animated:YES completion:nil];
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -234,6 +292,9 @@
     [self.myTab setEditing:!self.myTab.editing animated:YES];
     
     
+    [self.myTab setAllowsSelectionDuringEditing:YES];
+    [self.myTab reloadData];
+    
     //The if ... else part is optional.  You might need to make some change to fit your's.
         if (self.myTab.editing)
             [self.navigationItem.rightBarButtonItem setTitle:@"Done"];
@@ -248,64 +309,131 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
         NSLog(@"Cancel");
         return;
     }
-    UITextField* textfield = [alertView textFieldAtIndex:0];
-    NSLog(@"Save. text: %@", textfield.text);
     
-    NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=insert&id=&title=%@",_userId,textfield.text];
-    NSLog(@"PostData: %@",post);
-    
-    NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
-    //            [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
-    
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *response = nil;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    // Define keys
-    uId = @"id";
-    titleName = @"title";
-    
-    // Create array to hold dictionaries
-    allObject = [[NSMutableArray alloc] init];
-    
-    NSLog(@"Response code: %d", [response statusCode]);
-    if ([response statusCode] >=200 && [response statusCode] <300)
-    {
-        NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-        //        NSLog(@"Response ==> %@", responseData);
+    if (self.myTab.isEditing) {
+        // Change name here
+        UITextField* textfield = [alertView textFieldAtIndex:0];
+        NSLog(@"change plan name. text: %@", textfield.text);
         
-        SBJsonParser *jsonParser = [SBJsonParser new];
-        NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
-        NSLog(@"%@",jsonData);
         
-        for (NSDictionary *get in jsonData)
+        NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=update&id=%@&title=%@",_userId,_idSelect,textfield.text];
+        NSLog(@"PostData: %@",post);
+        
+        NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
+        
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        
+        //            [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *response = nil;
+        NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        // Define keys
+        uId = @"id";
+        titleName = @"title";
+        
+        // Create array to hold dictionaries
+        allObject = [[NSMutableArray alloc] init];
+        
+        NSLog(@"Response code: %d", [response statusCode]);
+        if ([response statusCode] >=200 && [response statusCode] <300)
         {
-            NSString *row_id = [get objectForKey:@"row_id"];
-            NSLog(@"%@",row_id);
-            NSString *title = [get objectForKey:@"title"];
-            NSLog(@"%@",title);
+            NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+            //        NSLog(@"Response ==> %@", responseData);
             
-            dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                    row_id, uId,
-                    title, titleName,
-                    nil];
-            [allObject addObject:dict];
+            SBJsonParser *jsonParser = [SBJsonParser new];
+            NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+            NSLog(@"%@",jsonData);
+            
+            for (NSDictionary *get in jsonData)
+            {
+                NSString *row_id = [get objectForKey:@"row_id"];
+                NSLog(@"%@",row_id);
+                NSString *title = [get objectForKey:@"title"];
+                NSLog(@"%@",title);
+                
+                dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                        row_id, uId,
+                        title, titleName,
+                        nil];
+                [allObject addObject:dict];
+            }
+            displayObject =[[NSMutableArray alloc] initWithArray:allObject];
+            [self.myTab reloadData];
         }
-        displayObject =[[NSMutableArray alloc] initWithArray:allObject];
-        [self.myTab reloadData];
+    }
+    else{
+        // Add new plan here
+        UITextField* textfield = [alertView textFieldAtIndex:0];
+        NSLog(@"Save. text: %@", textfield.text);
+        
+        NSString *post =[[NSString alloc] initWithFormat:@"user_id=%@&method=insert&id=&title=%@",_userId,textfield.text];
+        NSLog(@"PostData: %@",post);
+        
+        NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getMainstorage.php"];
+        
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:url];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:postData];
+        
+        //            [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[url host]];
+        
+        NSError *error = [[NSError alloc] init];
+        NSHTTPURLResponse *response = nil;
+        NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        // Define keys
+        uId = @"id";
+        titleName = @"title";
+        
+        // Create array to hold dictionaries
+        allObject = [[NSMutableArray alloc] init];
+        
+        NSLog(@"Response code: %d", [response statusCode]);
+        if ([response statusCode] >=200 && [response statusCode] <300)
+        {
+            NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+            //        NSLog(@"Response ==> %@", responseData);
+            
+            SBJsonParser *jsonParser = [SBJsonParser new];
+            NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+            NSLog(@"%@",jsonData);
+            
+            for (NSDictionary *get in jsonData)
+            {
+                NSString *row_id = [get objectForKey:@"row_id"];
+                NSLog(@"%@",row_id);
+                NSString *title = [get objectForKey:@"title"];
+                NSLog(@"%@",title);
+                
+                dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                        row_id, uId,
+                        title, titleName,
+                        nil];
+                [allObject addObject:dict];
+            }
+            displayObject =[[NSMutableArray alloc] initWithArray:allObject];
+            [self.myTab reloadData];
+        }
     }
 }
 

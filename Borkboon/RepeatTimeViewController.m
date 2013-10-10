@@ -35,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    repeats = [NSArray arrayWithObjects:@"ไม่เตือน",@"ทุกวัน",@"ทุกสัปดาห์",@"ทุก 2 สัปดาห์",@"ทุกเดือน",@"ทุกปี", nil];
+    repeats = [NSArray arrayWithObjects:@"ไม่เตือน",@"ทุกวัน",@"ทุกสัปดาห์",@"ทุกเดือน",@"ทุกปี", nil];
     selectedIndex = [repeats indexOfObject:self.repeat];
 
 }

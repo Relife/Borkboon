@@ -21,4 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic) NSString *byteArray;
+
+
+- (IBAction)btBackAction:(id)sender;
+
 @end

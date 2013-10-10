@@ -9,6 +9,7 @@
 #import "Sign-inViewController.h"
 #import "SBJson.h"
 #import "UserplansViewController1.h"
+#import "AppDelegate.h"
 
 @interface Sign_inViewController ()
 
@@ -97,11 +98,15 @@
                     NSLog(@"Login SUCCESS");
                     [self alertStatus:@"Logged in Successfully." :@"Login Success!"];
                     //
-                    UserplansViewController1 *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UserplansView1"];
+                    //UserplansViewController1 *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"UserplansView1"];
                     
-                    tvc.userId = uId;
+                    //tvc.userId = uId;
                     
-                    [self.navigationController pushViewController:tvc animated:YES];
+                    //[self.navigationController pushViewController:tvc animated:YES];
+                    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                    [app setUserID:uId];
+                    [app setLoginState:LSTATE_LOGIN_EMAIL];
+                    [self dismissViewControllerAnimated:YES completion:nil];
                     
 //                    [self presentViewController:tvc animated:YES completion:nil];
                 } else {
@@ -126,5 +131,9 @@
 - (IBAction)backgroundClick:(id)sender {
     [_password resignFirstResponder];
     [_email resignFirstResponder];
+}
+
+- (IBAction)btBackAction:(id)sender {
+     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

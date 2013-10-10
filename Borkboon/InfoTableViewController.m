@@ -12,6 +12,8 @@
 #import <Social/Social.h>
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "AppDelegate.h"
+
 @interface InfoTableViewController ()
 
 @end
@@ -150,10 +152,23 @@
     }
     else if (actionSheet.tag == 2){
         switch (buttonIndex) {
-            case 0:
+            case 0:{
+                NSLog(@"logout");
+                
+                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [app setLoginState:LSTATE_LOGOUT];
+                
+                [app.session closeAndClearTokenInformation];
+                [[FBSession activeSession] closeAndClearTokenInformation];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
                 break;
-            case 1:
+            }
+            case 1:{
+                NSLog(@"cancel");
                 break;
+            }
         }
     }
 }

@@ -12,6 +12,10 @@
 @implementation User
 
 @dynamic uId;
-@dynamic user;
+@dynamic planName;
+@dynamic prayName;
+@dynamic repeat;
+@dynamic snooze;
+@dynamic startTime;
 
 @end

@@ -235,4 +235,7 @@ bool newMedia;
     [_txtBirthday resignFirstResponder];
 }
 
+- (IBAction)btBackAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

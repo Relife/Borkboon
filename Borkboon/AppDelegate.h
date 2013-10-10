@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 
+enum LOGIN_STATE {
+    LSTATE_LOGOUT = -1,
+    LSTATE_NOT_LOGIN = 0,
+    LSTATE_LOGIN_EMAIL = 1,
+    LSTATE_LOGIN_FACEBOOK = 2
+    };
+
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 
@@ -21,5 +29,13 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+// 0 not login
+// 1 email
+// 2 facebook
+// -1 log out
+@property (nonatomic, readwrite ) int loginState;
+@property (nonatomic, retain ) NSString* userID;
+
 
 @end

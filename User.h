@@ -13,6 +13,10 @@
 @interface User : NSManagedObject
 
 @property (nonatomic, retain) NSString * uId;
-@property (nonatomic, retain) NSString * user;
+@property (nonatomic, retain) NSString * planName;
+@property (nonatomic, retain) NSString * prayName;
+@property (nonatomic, retain) NSString * repeat;
+@property (nonatomic, retain) NSString * snooze;
+@property (nonatomic, retain) NSString * startTime;
 
 @end

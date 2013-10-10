@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="11G63b" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Plan" syncable="YES">
+    <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="planName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="prays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pray" inverseName="plan" inverseEntity="Pray" syncable="YES"/>
-        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="users" inverseEntity="User" syncable="YES"/>
-    </entity>
-    <entity name="Pray" syncable="YES">
         <attribute name="prayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="repeat" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="snoze" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="plan" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Plan" inverseName="prays" inverseEntity="Plan" syncable="YES"/>
-    </entity>
-    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="snooze" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uId" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Plan" inverseName="user" inverseEntity="Plan" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-704" positionY="-288" width="128" height="75"/>
-        <element name="Plan" positionX="-524" positionY="-288" width="128" height="90"/>
-        <element name="Pray" positionX="-353" positionY="-282" width="128" height="120"/>
+        <element name="User" positionX="-911" positionY="-642" width="128" height="135"/>
     </elements>
 </model>

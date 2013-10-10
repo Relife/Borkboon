@@ -35,6 +35,29 @@ AppDelegate *appDelegate;
 
 - (void)viewDidLoad
 {
+    //valueSw
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+    if([userdefault boolForKey:@"yes"]) {
+        _snoozeSw.on=YES;
+        _switchValue = @"Yes";
+    } else {
+        _snoozeSw.on=NO;
+        _switchValue = @"No";
+    }
+    
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sentValue:)
+                                                 name:@"SentRepeat"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sentTime:)
+                                                 name:@"SentTime"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sentDateTime:)
+                                                 name:@"SentDateTime"
+                                               object:nil];
     appDelegate = [[AppDelegate alloc] init];
     if (_dataRecords == nil) {
         _dataRecords = [[NSMutableArray alloc] init];
@@ -46,27 +69,21 @@ AppDelegate *appDelegate;
     
     NSArray *t = [self fetchData];
     
+    
     for (int i=0; i < [t count]; i++) {
         [_dataRecords addObject:[t objectAtIndex:i]];
         User *p = _dataRecords[i];
         NSLog(@"uId = %@",p.uId);
+        NSLog(@"planName = %@",p.planName);
+        NSLog(@"prayName = %@",p.prayName);
+        NSLog(@"startTime = %@",p.startTime);
+        NSLog(@"repeat = %@",p.repeat);
+        NSLog(@"snooze = %@",p.snooze);        
     }
-    
-    
-    [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(sentValue:)
-                                                 name:@"SentRepeat"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(sentTime:)
-                                                 name:@"SentTime"
-                                               object:nil]; 
-
     _nameLabel.text = _getName;
     _planNameLabel.text = _getPlanName;
-//    _timeStartLabel.text = _timeStart;
-//    _repeatLabel.text = _getRepeat;
+    _timeStartLabel.text = _timeStart;
+    _repeatLabel.text = _getRepeat;
 }
 
 -(NSArray *) fetchData
@@ -80,7 +97,6 @@ AppDelegate *appDelegate;
     NSArray *listData = [[appDelegate managedObjectContext
                           ] executeFetchRequest:request error:nil];
 
-        
     return listData;
 }
 
@@ -94,10 +110,15 @@ AppDelegate *appDelegate;
 - (void)sentTime:(NSNotification *)notification {
     NSLog(@"%@", notification.object);
     NSLog(@"%@", [notification.object objectForKey:@"Time"]);
+    NSLog(@"%@", [notification.object objectForKey:@"nsDate"]);
     _timeStart = [notification.object objectForKey:@"Time"];
     _timeStartLabel.text = _timeStart;
 }
 
+- (void)sentDateTime:(NSNotification *)notification {
+    NSLog(@"%@", notification.object);
+    _dateTime = notification.object;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -188,10 +209,55 @@ AppDelegate *appDelegate;
     NSManagedObject *p = [NSEntityDescription
                           insertNewObjectForEntityForName:@"User" inManagedObjectContext:[appDelegate managedObjectContext]];
     [p setValue:_getUserId forKey:@"uId"];
-//    [p setValue:_nameLabel.text forKey:@"user"];
-    
+    [p setValue:_planNameLabel.text forKey:@"planName"];
+    [p setValue:_nameLabel.text forKey:@"prayName"];
+    [p setValue:_repeatLabel.text forKey:@"repeat"];
+    [p setValue:_switchValue forKey:@"snooze"];
+    [p setValue:_timeStartLabel.text forKey:@"startTime"];
     [[appDelegate managedObjectContext] save:nil];
     }
+    
+    UILocalNotification *notif = [[UILocalNotification alloc] init];
+    
+    notif.fireDate = _dateTime;
+    notif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    notif.alertBody = @"Did you forget something?";
+    notif.alertAction = @"Show me";
+    notif.soundName = UILocalNotificationDefaultSoundName;
+    notif.applicationIconBadgeNumber = 1;
+    
+    if ([_getRepeat isEqual: @"ทุกวัน"]) {
+        notif.repeatInterval = NSDayCalendarUnit;
+    }
+    else if ([_getRepeat isEqual: @"ทุกสัปดาห์"]){
+        notif.repeatInterval = NSWeekCalendarUnit;
+    }
+    else if ([_getRepeat isEqual: @"ทุกเดือน"]){
+        notif.repeatInterval = NSMonthCalendarUnit;
+    }
+    else if ([_getRepeat isEqual: @"ทุกปี"]){
+        notif.repeatInterval = NSYearCalendarUnit;
+    }
+    else{
+        notif.repeatInterval = 0;
+    }
+    NSDictionary *userDict = [NSDictionary dictionaryWithObject:@"someValue"
+                                                         forKey:@"someKey"];
+    notif.userInfo = userDict;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)Swchang:(id)sender {
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+    if (_snoozeSw.on) {
+        [userdefault setBool:YES forKey:@"yes"];
+        _switchValue = @"Yes";
+    } else {
+        [userdefault setBool:NO forKey:@"no"];
+        _switchValue = @"No";
+    }
+}
 @end

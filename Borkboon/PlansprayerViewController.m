@@ -34,26 +34,48 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateView];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    if (!appDelegate.session.isOpen) {
-        // create a fresh session object
-        appDelegate.session = [[FBSession alloc] init];
+    
+    
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    if (app.loginState == LSTATE_LOGOUT || app.loginState == LSTATE_NOT_LOGIN) {
         
-        // if we don't have a cached token, a call to open here would cause UX for login to
-        // occur; we don't want that to happen unless the user clicks the login button, and so
-        // we check here to make sure we have a token before calling open
-        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
-            // even though we had a cached token, we need to login to make the session usable
-            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
-                                                             FBSessionState status,
-                                                             NSError *error) {
-                // we recurse here, in order to update buttons and labels
-                
-                
-                [self updateView];
-            }];
+        
+        [self updateView];
+        
+        
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        if (!appDelegate.session.isOpen) {
+            // create a fresh session object
+            appDelegate.session = [[FBSession alloc] init];
+            
+            // if we don't have a cached token, a call to open here would cause UX for login to
+            // occur; we don't want that to happen unless the user clicks the login button, and so
+            // we check here to make sure we have a token before calling open
+            if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
+                // even though we had a cached token, we need to login to make the session usable
+                [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                                 FBSessionState status,
+                                                                 NSError *error) {
+                    // we recurse here, in order to update buttons and labels
+                    
+                    
+                    [self updateView];
+                    
+                    
+                }];
+            }
         }
+    }
+    else if(app.loginState == LSTATE_LOGIN_EMAIL){
+        
+    }
+    else if(app.loginState == LSTATE_LOGIN_FACEBOOK){
+        [self updateView];
     }
 }
 
@@ -64,6 +86,17 @@
         // valid account UI is shown whenever the session is open
         
         [self.btlogin setTitle:@"  Log out" forState:UIControlStateNormal];
+        [FBSession setActiveSession:appDelegate.session];
+        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            
+            NSString* uid = [[result objectForKey:@"id"] copy];
+            [appDelegate setUserID:uid];
+            [appDelegate setLoginState:LSTATE_LOGIN_FACEBOOK];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        
         
     } else {
         // login-needed account UI is shown whenever the session is closed
@@ -113,6 +146,11 @@
     [super viewDidUnload];
 }
 - (IBAction)exitBt:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion: ^{
+        
+    }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"EXIT_LOGIN" object:nil];
+    
 }
 @end
