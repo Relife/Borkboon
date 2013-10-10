@@ -247,6 +247,7 @@ AppDelegate *appDelegate;
     notif.userInfo = userDict;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)Swchang:(id)sender {
