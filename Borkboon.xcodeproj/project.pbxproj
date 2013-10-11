@@ -115,11 +115,9 @@
 		E150D8C717FA73F80026C4D7 /* star_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = E150D8C417FA73E40026C4D7 /* star_yellow.png */; };
 		E150D8C817FA73F80026C4D7 /* star_yellow-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E150D8C517FA73ED0026C4D7 /* star_yellow-gray.png */; };
 		E150D8CA17FA776A0026C4D7 /* icon_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = E150D8C917FA77660026C4D7 /* icon_clock.png */; };
-		E150DAE317FBCEFE0026C4D7 /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = E150DAE217FBCEFE0026C4D7 /* DAAutoScroll.m */; };
 		E150DAE617FDD0AB0026C4D7 /* RepeatTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E150DAE517FDD0AB0026C4D7 /* RepeatTimeViewController.m */; };
 		E175D95A17C92FE500F54614 /* Prayer-basicDetailViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = E175D95917C92FE500F54614 /* Prayer-basicDetailViewController1.m */; };
 		E17A078517DE366100DD65FC /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A078417DE366000DD65FC /* InfoViewController.m */; };
-		E17A078C17DEDBE600DD65FC /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E17A078A17DEDBE500DD65FC /* MainStoryboard_iPhone.storyboard */; };
 		E17A078F17DEDC3000DD65FC /* InfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A078E17DEDC2F00DD65FC /* InfoTableViewController.m */; };
 		E17A079117DEE30700DD65FC /* developer.png in Resources */ = {isa = PBXBuildFile; fileRef = E17A079017DEE30600DD65FC /* developer.png */; };
 		E17A079417DEE55600DD65FC /* Info1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A079317DEE55400DD65FC /* Info1ViewController.m */; };
@@ -246,6 +244,7 @@
 		E1E0E5B91806580E0097DD5A /* logo_app@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5B81806580D0097DD5A /* logo_app@2x~ipad.png */; };
 		E1E0E5BC18069D150097DD5A /* bar_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5BA18069D150097DD5A /* bar_down@2x.png */; };
 		E1E0E5BD18069D150097DD5A /* bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E0E5BB18069D150097DD5A /* bar@2x.png */; };
+		E1F153111807E82B00154255 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F153101807E82B00154255 /* MainStoryboard_iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -376,15 +375,12 @@
 		E150D8C417FA73E40026C4D7 /* star_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_yellow.png; sourceTree = "<group>"; };
 		E150D8C517FA73ED0026C4D7 /* star_yellow-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_yellow-gray.png"; sourceTree = "<group>"; };
 		E150D8C917FA77660026C4D7 /* icon_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_clock.png; sourceTree = "<group>"; };
-		E150DAE117FBCEFE0026C4D7 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
-		E150DAE217FBCEFE0026C4D7 /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
 		E150DAE417FDD0AB0026C4D7 /* RepeatTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatTimeViewController.h; sourceTree = "<group>"; };
 		E150DAE517FDD0AB0026C4D7 /* RepeatTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatTimeViewController.m; sourceTree = "<group>"; };
 		E175D95817C92FE500F54614 /* Prayer-basicDetailViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Prayer-basicDetailViewController1.h"; sourceTree = "<group>"; };
 		E175D95917C92FE500F54614 /* Prayer-basicDetailViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Prayer-basicDetailViewController1.m"; sourceTree = "<group>"; };
 		E17A078317DE366000DD65FC /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		E17A078417DE366000DD65FC /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
-		E17A078B17DEDBE600DD65FC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E17A078D17DEDC2E00DD65FC /* InfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewController.h; sourceTree = "<group>"; };
 		E17A078E17DEDC2F00DD65FC /* InfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTableViewController.m; sourceTree = "<group>"; };
 		E17A079017DEE30600DD65FC /* developer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = developer.png; sourceTree = "<group>"; };
@@ -534,6 +530,7 @@
 		E1E0E5B81806580D0097DD5A /* logo_app@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_app@2x~ipad.png"; sourceTree = "<group>"; };
 		E1E0E5BA18069D150097DD5A /* bar_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_down@2x.png"; sourceTree = "<group>"; };
 		E1E0E5BB18069D150097DD5A /* bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar@2x.png"; sourceTree = "<group>"; };
+		E1F153101807E82B00154255 /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -686,15 +683,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		E150DAE017FBCEE90026C4D7 /* DAAutoScroll */ = {
-			isa = PBXGroup;
-			children = (
-				E150DAE117FBCEFE0026C4D7 /* DAAutoScroll.h */,
-				E150DAE217FBCEFE0026C4D7 /* DAAutoScroll.m */,
-			);
-			path = DAAutoScroll;
-			sourceTree = "<group>";
-		};
 		E175D95E17C9338500F54614 /* Pray1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,7 +753,6 @@
 			isa = PBXGroup;
 			children = (
 				E1C5ED741803EB2A00F3208A /* calenda */,
-				E150DAE017FBCEE90026C4D7 /* DAAutoScroll */,
 				E11A564A17D86C4E00E7573B /* base64 */,
 				E11A562117D73C4B00E7573B /* json */,
 				E150D82D17F93D7D0026C4D7 /* iPad */,
@@ -775,7 +762,7 @@
 				E17AD2B517C1D39100CD6574 /* AppDelegate.h */,
 				E17AD2B617C1D39100CD6574 /* AppDelegate.m */,
 				E17AD2C117C1D39100CD6574 /* MainStoryboard_iPad.storyboard */,
-				E17A078A17DEDBE500DD65FC /* MainStoryboard_iPhone.storyboard */,
+				E1F153101807E82B00154255 /* MainStoryboard_iPhone.storyboard */,
 				E17AD71017C2067300CD6574 /* Tab1 */,
 				E11A55BC17D0A46F00E7573B /* Tab2 */,
 				E17A078617DE366700DD65FC /* Tab4 */,
@@ -1096,7 +1083,6 @@
 				E11A565B17D89B8300E7573B /* icon_delete_02.png in Resources */,
 				E11A565C17D89B8300E7573B /* icon_information.png in Resources */,
 				E11A565D17D89B8300E7573B /* switch_off.png in Resources */,
-				E17A078C17DEDBE600DD65FC /* MainStoryboard_iPhone.storyboard in Resources */,
 				E17A079117DEE30700DD65FC /* developer.png in Resources */,
 				E17A079917DEFEBF00DD65FC /* bg.png in Resources */,
 				E1B1845617F094CA000302DD /* done.png in Resources */,
@@ -1232,6 +1218,7 @@
 				E1E0E5BC18069D150097DD5A /* bar_down@2x.png in Resources */,
 				E1E0E5BD18069D150097DD5A /* bar@2x.png in Resources */,
 				AD803BF21807B3EB00369028 /* button_amen.png in Resources */,
+				E1F153111807E82B00154255 /* MainStoryboard_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,7 +1261,6 @@
 				E1B1843F17EFEAE3000302DD /* MenuViewController.m in Sources */,
 				E1B1844217EFEC1F000302DD /* CollectionCell.m in Sources */,
 				E1B1845B17F1534C000302DD /* Plantime.m in Sources */,
-				E150DAE317FBCEFE0026C4D7 /* DAAutoScroll.m in Sources */,
 				E150DAE617FDD0AB0026C4D7 /* RepeatTimeViewController.m in Sources */,
 				E1C5ECE71801829300F3208A /* ViewControllerTest.m in Sources */,
 				E1C5ECEC180311E600F3208A /* Data.xcdatamodeld in Sources */,
@@ -1292,14 +1278,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E17A078A17DEDBE500DD65FC /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E17A078B17DEDBE600DD65FC /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
 		E17AD2AF17C1D39100CD6574 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
