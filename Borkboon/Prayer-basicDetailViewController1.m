@@ -27,6 +27,7 @@
     NSString *stopt;
     
 }
+@property (nonatomic,weak) IBOutlet UIButton *sathuButton;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, weak) IBOutlet UISlider *slider;
 @property (nonatomic, weak) IBOutlet UILabel *labelNumRemain;
@@ -36,8 +37,9 @@
 static float testOffset = 0;
 float speed = 1.0;
 float current;
-float scrollViewHeight = 790;
+float scrollViewHeight = 0;
 int numPrayRemain = 2;
+NSString *strWebWithBr = @"";
 @synthesize responseData = _responseData;
 Boolean isPlaying = NO;
 
@@ -101,6 +103,7 @@ Boolean isPlaying = NO;
         [connectFailMessage show];
     }
     self.webView1.scrollView.delegate = self;
+    self.webView1.delegate = self;
     [self updateSliderValue:0.0];
     [_slider addTarget:self
                   action:@selector(sliderDrag:)
@@ -108,6 +111,9 @@ Boolean isPlaying = NO;
     [_slider addTarget:self
                 action:@selector(sliderStopDrag:)
       forControlEvents:(UIControlEventTouchUpInside)];
+
+    // add number pray remain in code
+    [_view1 bringSubviewToFront:_labelNumRemain];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -156,7 +162,8 @@ Boolean isPlaying = NO;
 //        _textView1.text = strBali;
 //        _textView2.text = strThaiAndBali;
 //        _textView3.text = strHistory;
-        [_webView1 loadHTMLString:strBali baseURL:nil];
+       strWebWithBr = [NSString stringWithFormat:@"%@<br><br><br>",strBali];
+        [_webView1 loadHTMLString:strWebWithBr baseURL:nil];
         [_webView2 loadHTMLString:strThaiAndBali baseURL:nil];
         [_webView3 loadHTMLString:strHistory baseURL:nil];
         
@@ -171,10 +178,12 @@ Boolean isPlaying = NO;
     displayObject =[[NSMutableArray alloc] initWithArray:allObject];
     //scrollViewHeight = self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height;
    // NSLog(@"Scroll View Height %f",scrollViewHeight);
-    CGFloat newHeight = [[_webView1 stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight;"] floatValue];
+    //CGFloat newHeight = [[_webView1 stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight;"] floatValue];
     
-    NSLog(@"Height webview %f",newHeight);
+       //NSLog(@"size: %f, %f", fittingSize.width, fittingSize.height);
     [_slider setMaximumValue:scrollViewHeight];
+    
+    // add sathu button 
     [self updateLabelRemainPray];
 }
 
@@ -246,6 +255,8 @@ Boolean isPlaying = NO;
     NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", fontSize];
     
     [_webView1 stringByEvaluatingJavaScriptFromString:jsString];
+   // [_webView1 reload];
+    [_webView1 loadHTMLString:strWebWithBr baseURL:nil];
 }
 
 - (IBAction)LBt:(id)sender {
@@ -254,6 +265,7 @@ Boolean isPlaying = NO;
     NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", fontSize];
     
     [_webView1 stringByEvaluatingJavaScriptFromString:jsString];
+    [_webView1 loadHTMLString:strWebWithBr baseURL:nil];
 }
 
 - (IBAction)playBt:(id)sender {
@@ -352,8 +364,6 @@ Boolean isPlaying = NO;
     //CGPoint OffsetStart = CGPointMake(0, 0);
     //[self.webView1.scrollView setContentOffset:OffsetStart animated:YES];
     //isPlaying = NO;
-    if(numPrayRemain > 0) numPrayRemain -=1;
-    [self updateLabelRemainPray];
     [_btPlay setImage:[UIImage imageNamed:@"button_play"] forState:UIControlStateNormal];
     if (Timer) {
         [Timer invalidate];
@@ -386,6 +396,8 @@ Boolean isPlaying = NO;
     _slider.value = value;
 }
 
+
+#pragma - mark slider delegate
 -(IBAction)sliderValueChanged:(UISlider *)sender
 {
     NSLog(@"slider value = %f", sender.value);
@@ -393,16 +405,55 @@ Boolean isPlaying = NO;
 }
 
 - (void)sliderDrag:(NSNotification *)notification {
-    [self pausePray];
+    
+    if(isPlaying)
+        [self pausePray];
 }
 
 - (void)sliderStopDrag:(NSNotification *)notification {
-    [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    if(isPlaying)
+        [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)updateLabelRemainPray{
     NSString *str = [NSString stringWithFormat:@"%d",numPrayRemain];
-    //[_labelNumRemain setText:str];
+    [_labelNumRemain setText:str];
+}
+-(IBAction)sathuButtonClick:(id)sender{
+    NSLog(@"sathuButtonClick");
+    [self updateLabelRemainPray];
+    if(numPrayRemain > 1){
+        numPrayRemain -=1;
+        [self updateLabelRemainPray];
+        [self stopPray];
+        [_webView1.scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+        [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"สวดครบแล้ว" message:@"ไปยังหน้าถัดไป" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+#pragma - mark webview delegate 
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    NSLog(@"%@",webView);
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    NSLog(@"%@",error);
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    scrollViewHeight = webView.scrollView.contentSize.height - self.view.frame.size.height;
+    
+    NSLog(@"scrollViewHeight : %f",scrollViewHeight);
+    CGRect rect = _sathuButton.frame;
+    rect.origin.y = scrollViewHeight + self.view.frame.size.height - 50;
+    _sathuButton.frame = rect;
+    [_webView1.scrollView addSubview:_sathuButton];
+    [_slider setMaximumValue:scrollViewHeight + 96];
 }
 
 @end
