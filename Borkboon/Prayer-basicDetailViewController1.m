@@ -28,6 +28,7 @@
     NSString *stopt;
     
 }
+@property (nonatomic,weak) IBOutlet UIButton *sathuButton;
 @property (nonatomic, strong) NSMutableData *responseData;
 @property (nonatomic, weak) IBOutlet UISlider *slider;
 @property (nonatomic, weak) IBOutlet UILabel *labelNumRemain;
@@ -102,6 +103,7 @@ Boolean isPlaying = NO;
         [connectFailMessage show];
     }
     self.webView1.scrollView.delegate = self;
+    self.webView1.delegate = self;
     [self updateSliderValue:0.0];
     [_slider addTarget:self
                   action:@selector(sliderDrag:)
@@ -109,6 +111,8 @@ Boolean isPlaying = NO;
     [_slider addTarget:self
                 action:@selector(sliderStopDrag:)
       forControlEvents:(UIControlEventTouchUpInside)];
+
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -172,10 +176,17 @@ Boolean isPlaying = NO;
     displayObject =[[NSMutableArray alloc] initWithArray:allObject];
     //scrollViewHeight = self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height;
    // NSLog(@"Scroll View Height %f",scrollViewHeight);
-    CGFloat newHeight = [[_webView1 stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight;"] floatValue];
+    //CGFloat newHeight = [[_webView1 stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight;"] floatValue];
     
-    NSLog(@"Height webview %f",newHeight);
+       //NSLog(@"size: %f, %f", fittingSize.width, fittingSize.height);
     [_slider setMaximumValue:scrollViewHeight];
+    
+    
+    CGRect rect = _sathuButton.frame;
+    rect.origin.y = 750;
+    _sathuButton.frame = rect;
+    [_webView1.scrollView addSubview:_sathuButton];
+    
     [self updateLabelRemainPray];
 }
 
@@ -387,6 +398,8 @@ Boolean isPlaying = NO;
     _slider.value = value;
 }
 
+
+#pragma - mark slider delegate
 -(IBAction)sliderValueChanged:(UISlider *)sender
 {
     NSLog(@"slider value = %f", sender.value);
@@ -394,16 +407,38 @@ Boolean isPlaying = NO;
 }
 
 - (void)sliderDrag:(NSNotification *)notification {
-    [self pausePray];
+    
+    if(isPlaying)
+        [self pausePray];
 }
 
 - (void)sliderStopDrag:(NSNotification *)notification {
-    [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    if(isPlaying)
+        [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)updateLabelRemainPray{
     NSString *str = [NSString stringWithFormat:@"%d",numPrayRemain];
     //[_labelNumRemain setText:str];
+}
+-(IBAction)sathuButtonClick:(id)sender{
+    NSLog(@"sathuButtonClick");
+    [self updateLabelRemainPray];
+}
+
+#pragma - mark webview delegate 
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    NSLog(@"%@",webView);
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    NSLog(@"%@",error);
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    NSLog(@"%@",webView);
+    testOffset = webView.scrollView.contentSize.height;
 }
 
 @end

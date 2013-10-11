@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Prayer_basicDetailViewController1 : UIViewController<NSURLConnectionDelegate,UIScrollViewDelegate>
+@interface Prayer_basicDetailViewController1 : UIViewController<NSURLConnectionDelegate,UIScrollViewDelegate,UIWebViewDelegate>
 {
     NSMutableData *_responseData;
 }

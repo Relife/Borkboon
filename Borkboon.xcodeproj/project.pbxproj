@@ -10,6 +10,7 @@
 		39C1F94C17F95E3A00A6752C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C1F94B17F95E3A00A6752C /* AdSupport.framework */; };
 		39C1F94E17F95E4B00A6752C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C1F94D17F95E4B00A6752C /* Accounts.framework */; };
 		39C1F95017F95EC200A6752C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C1F94F17F95EC200A6752C /* Security.framework */; };
+		AD803BF21807B3EB00369028 /* button_amen.png in Resources */ = {isa = PBXBuildFile; fileRef = AD803BF11807B3E800369028 /* button_amen.png */; };
 		E1062C8A17D9E21A008C37A7 /* UserplansViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = E1062C8917D9E21A008C37A7 /* UserplansViewController2.m */; };
 		E11A53BC17D0439300E7573B /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = E11A53B517D0439300E7573B /* camera.png */; };
 		E11A53BD17D0439300E7573B /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E11A53B617D0439300E7573B /* logo.png */; };
@@ -251,6 +252,7 @@
 		39C1F94B17F95E3A00A6752C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		39C1F94D17F95E4B00A6752C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		39C1F94F17F95EC200A6752C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AD803BF11807B3E800369028 /* button_amen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_amen.png; sourceTree = SOURCE_ROOT; };
 		E1062C8817D9E21A008C37A7 /* UserplansViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserplansViewController2.h; sourceTree = "<group>"; };
 		E1062C8917D9E21A008C37A7 /* UserplansViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserplansViewController2.m; sourceTree = "<group>"; };
 		E11A53B517D0439300E7573B /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 		E180C9AA17C9459200D1D154 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				AD803BF11807B3E800369028 /* button_amen.png */,
 				E1E0E5691805D7F50097DD5A /* bar.png */,
 				E1E0E5671805D64D0097DD5A /* bar_down.png */,
 				E1E0E5571805D0BF0097DD5A /* icon_calendar_blue.png */,
@@ -1228,6 +1231,7 @@
 				E1E0E5B91806580E0097DD5A /* logo_app@2x~ipad.png in Resources */,
 				E1E0E5BC18069D150097DD5A /* bar_down@2x.png in Resources */,
 				E1E0E5BD18069D150097DD5A /* bar@2x.png in Resources */,
+				AD803BF21807B3EB00369028 /* button_amen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
