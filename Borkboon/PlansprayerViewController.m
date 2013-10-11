@@ -89,9 +89,9 @@
         
         [self.btlogin setTitle:@"  Log out" forState:UIControlStateNormal];
         [FBSession setActiveSession:appDelegate.session];
-        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            
-            [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+//        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
+        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
                 if (error) {
                     
                     NSLog(@"error:%@",error);
@@ -112,7 +112,7 @@
                     _fb_id = user.id;
                     _image = profilePicURL;
                 }
-            }];
+//            }];
             
             FBRequest* friendsRequest = [FBRequest requestForMyFriends];
             [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
@@ -161,13 +161,13 @@
 //                NSString *uId = [[jsonData objectForKey:@"userinfo"] objectForKey:@"uid"];
 //                NSLog(@"uId=%@",uId);
 //            }
-            
-            NSString* uid = [[result objectForKey:@"id"] copy];
+    
+            NSString* uid = [[user objectForKey:@"id"] copy];
             [appDelegate setUserID:uid];
             [appDelegate setLoginState:LSTATE_LOGIN_FACEBOOK];
             
             [self dismissViewControllerAnimated:YES completion:nil];
-            
+
         }];
 
         
