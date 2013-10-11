@@ -78,6 +78,12 @@
     CXCalendarCellView* cell = [calendarView cellForDate:date];
 
     [icon_prayday setHidden:!cell.isPrayDay];
+    if (cell.moonDay == 30 || cell.moonDay == 15) {
+        [icon_prayday setImage:[UIImage imageNamed:@"icon_fullmoon.png"]];
+    }else{
+        [icon_prayday setImage:[UIImage imageNamed:@"icon_moon.png"]];        
+    }
+    
     if (cell.moonDay > 15) {
         dateTxt = [NSString stringWithFormat:@"%@ วันแรม %d ค่ำเดือน %d",dateTxt, cell.moonDay-15, cell.moonMonth];
     }else{

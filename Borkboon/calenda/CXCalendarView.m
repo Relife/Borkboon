@@ -241,6 +241,12 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
         UIImageView* image = (UIImageView*)[cell viewWithTag:999];
         
         [image setHidden:![self CheckPrayDay:cell.day Month:self.displayedMonth Year:self.displayedYear WithCell:cell]];
+        if (cell.moonDay == 30 || cell.moonDay == 15) {
+            [image setImage:[UIImage imageNamed:@"icon_fullmoon.png"]];
+        }
+        else{
+            [image setImage:[UIImage imageNamed:@"icon_moon.png"]];
+        }
     }
 }
 
@@ -262,6 +268,12 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
         UIImageView* image = (UIImageView*)[cell viewWithTag:999];
         
         [image setHidden:![self CheckPrayDay:cell.day Month:self.displayedMonth Year:self.displayedYear WithCell:cell]];
+        if (cell.moonDay == 30 || cell.moonDay == 15) {
+            [image setImage:[UIImage imageNamed:@"icon_fullmoon.png"]];
+        }
+        else{
+            [image setImage:[UIImage imageNamed:@"icon_moon.png"]];
+        }
     }
 }
 
@@ -521,6 +533,12 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
             [cell addSubview:image];
             
             [image setHidden:![self CheckPrayDay:i Month:self.displayedMonth Year:self.displayedYear WithCell:cell]];
+            if (cell.moonDay == 30 || cell.moonDay == 15) {
+                [image setImage:[UIImage imageNamed:@"icon_fullmoon.png"]];
+            }
+            else{
+                [image setImage:[UIImage imageNamed:@"icon_moon.png"]];
+            }
             
             cell.normalBackgroundColor = self.cellNormalBackgroundColor;
             cell.selectedBackgroundColor = self.cellSelectedBackgroundColor;
@@ -606,6 +624,14 @@ static const CGFloat kDefaultMonthBarButtonWidth = 60;
 - (Boolean) CheckPrayDay:(int)d Month:(int)m Year:(int)y WithCell:(CXCalendarCellView*)cell{
     
     Boolean isPrayDay = NO;
+    
+    //Check year
+    // Hard code but affective
+    if (y >= 2500) {
+        y -= 543;
+        
+        //2556 - 2013
+    }
     
     //Check PrayDay
     //Moonday = 8,15,23, 29 และไม่ใช่วันสุดท้ายของเดือน และ วันถัดไปต้องเป็น 1, 30
