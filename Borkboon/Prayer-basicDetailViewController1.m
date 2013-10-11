@@ -38,8 +38,9 @@
 static float testOffset = 0;
 float speed = 1.0;
 float current;
-float scrollViewHeight = 790;
+float scrollViewHeight = 0;
 int numPrayRemain = 2;
+NSString *strWebWithBr = @"";
 @synthesize responseData = _responseData;
 Boolean isPlaying = NO;
 
@@ -112,7 +113,8 @@ Boolean isPlaying = NO;
                 action:@selector(sliderStopDrag:)
       forControlEvents:(UIControlEventTouchUpInside)];
 
-    
+    // add number pray remain in code
+    [_view1 bringSubviewToFront:_labelNumRemain];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -161,7 +163,8 @@ Boolean isPlaying = NO;
 //        _textView1.text = strBali;
 //        _textView2.text = strThaiAndBali;
 //        _textView3.text = strHistory;
-        [_webView1 loadHTMLString:strBali baseURL:nil];
+       strWebWithBr = [NSString stringWithFormat:@"%@<br><br><br>",strBali];
+        [_webView1 loadHTMLString:strWebWithBr baseURL:nil];
         [_webView2 loadHTMLString:strThaiAndBali baseURL:nil];
         [_webView3 loadHTMLString:strHistory baseURL:nil];
         
@@ -181,12 +184,7 @@ Boolean isPlaying = NO;
        //NSLog(@"size: %f, %f", fittingSize.width, fittingSize.height);
     [_slider setMaximumValue:scrollViewHeight];
     
-    
-    CGRect rect = _sathuButton.frame;
-    rect.origin.y = 750;
-    _sathuButton.frame = rect;
-    [_webView1.scrollView addSubview:_sathuButton];
-    
+    // add sathu button 
     [self updateLabelRemainPray];
 }
 
@@ -258,6 +256,8 @@ Boolean isPlaying = NO;
     NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", fontSize];
     
     [_webView1 stringByEvaluatingJavaScriptFromString:jsString];
+   // [_webView1 reload];
+    [_webView1 loadHTMLString:strWebWithBr baseURL:nil];
 }
 
 - (IBAction)LBt:(id)sender {
@@ -266,6 +266,7 @@ Boolean isPlaying = NO;
     NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", fontSize];
     
     [_webView1 stringByEvaluatingJavaScriptFromString:jsString];
+    [_webView1 loadHTMLString:strWebWithBr baseURL:nil];
 }
 
 - (IBAction)playBt:(id)sender {
@@ -364,8 +365,6 @@ Boolean isPlaying = NO;
     //CGPoint OffsetStart = CGPointMake(0, 0);
     //[self.webView1.scrollView setContentOffset:OffsetStart animated:YES];
     //isPlaying = NO;
-    if(numPrayRemain > 0) numPrayRemain -=1;
-    [self updateLabelRemainPray];
     [_btPlay setImage:[UIImage imageNamed:@"button_play"] forState:UIControlStateNormal];
     if (Timer) {
         [Timer invalidate];
@@ -420,11 +419,22 @@ Boolean isPlaying = NO;
 
 -(void)updateLabelRemainPray{
     NSString *str = [NSString stringWithFormat:@"%d",numPrayRemain];
-    //[_labelNumRemain setText:str];
+    [_labelNumRemain setText:str];
 }
 -(IBAction)sathuButtonClick:(id)sender{
     NSLog(@"sathuButtonClick");
     [self updateLabelRemainPray];
+    if(numPrayRemain > 1){
+        numPrayRemain -=1;
+        [self updateLabelRemainPray];
+        [self stopPray];
+        [_webView1.scrollView setContentOffset:CGPointMake(0.0, 0.0) animated:YES];
+        [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"สวดครบแล้ว" message:@"ไปยังหน้าถัดไป" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 #pragma - mark webview delegate 
@@ -437,8 +447,14 @@ Boolean isPlaying = NO;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    NSLog(@"%@",webView);
-    testOffset = webView.scrollView.contentSize.height;
+    scrollViewHeight = webView.scrollView.contentSize.height - self.view.frame.size.height;
+    
+    NSLog(@"scrollViewHeight : %f",scrollViewHeight);
+    CGRect rect = _sathuButton.frame;
+    rect.origin.y = scrollViewHeight + self.view.frame.size.height - 50;
+    _sathuButton.frame = rect;
+    [_webView1.scrollView addSubview:_sathuButton];
+    [_slider setMaximumValue:scrollViewHeight + 96];
 }
 
 @end
