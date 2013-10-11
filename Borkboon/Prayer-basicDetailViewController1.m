@@ -29,12 +29,16 @@
     
 }
 @property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, weak) IBOutlet UISlider *slider;
+@property (nonatomic, weak) IBOutlet UILabel *labelNumRemain;
 @end
 
 @implementation Prayer_basicDetailViewController1
 static float testOffset = 0;
 float speed = 1.0;
 float current;
+float scrollViewHeight = 790;
+int numPrayRemain = 2;
 @synthesize responseData = _responseData;
 Boolean isPlaying = NO;
 
@@ -98,6 +102,13 @@ Boolean isPlaying = NO;
         [connectFailMessage show];
     }
     self.webView1.scrollView.delegate = self;
+    [self updateSliderValue:0.0];
+    [_slider addTarget:self
+                  action:@selector(sliderDrag:)
+        forControlEvents:(UIControlEventTouchDown)];
+    [_slider addTarget:self
+                action:@selector(sliderStopDrag:)
+      forControlEvents:(UIControlEventTouchUpInside)];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -139,7 +150,7 @@ Boolean isPlaying = NO;
         NSString *strThaiAndBali = [result objectForKey:@"thai_and_bali"];
         NSString *strHistory = [result objectForKey:@"history"];
         NSString *strPrayloop = [result objectForKey:@"pray_loop"];
-        NSLog(@"bali: %@", strBali);
+        //NSLog(@"bali: %@", strBali);
 //        NSLog(@"thai_and_bali: %@", thai_and_bali);
 //        NSLog(@"history %@", history);
 //        NSLog(@"prayloop %@", prayloop);
@@ -159,6 +170,13 @@ Boolean isPlaying = NO;
         [allObject addObject:dict];
     }
     displayObject =[[NSMutableArray alloc] initWithArray:allObject];
+    //scrollViewHeight = self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height;
+   // NSLog(@"Scroll View Height %f",scrollViewHeight);
+    CGFloat newHeight = [[_webView1 stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight;"] floatValue];
+    
+    NSLog(@"Height webview %f",newHeight);
+    [_slider setMaximumValue:scrollViewHeight];
+    [self updateLabelRemainPray];
 }
 
 //-(void)webViewDidFinishLoad:(UIWebView *)webView1{
@@ -243,10 +261,11 @@ Boolean isPlaying = NO;
 //    CGPoint bottomOffset = CGPointMake(0, self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height);
 //    [self.webView1.scrollView setContentOffset:bottomOffset animated:YES];
 //    _btPlay.hidden = YES;
-    NSString *str = [NSString stringWithFormat:@"Speed %f",speed];
-    NSLog(str);
+    
+    NSLog(@"is Playing : %d",isPlaying);
+    
     if(!isPlaying) {
-        [_btPlay setImage:[UIImage imageNamed:@"button_no"] forState:UIControlStateNormal];
+        [_btPlay setImage:[UIImage imageNamed:@"button_stop"] forState:UIControlStateNormal];
         Timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(scrollWebview) userInfo:nil repeats:YES];
        
     }else{
@@ -258,15 +277,15 @@ Boolean isPlaying = NO;
 
 
 - (IBAction)slowBT:(id)sender {
-    speed = 0.5;
+    speed = 5.0;
 }
 
 - (IBAction)mediumBt:(id)sender {
-    speed = 1.0;
+    speed = 10.0;
 }
 
 - (IBAction)fastBt:(id)sender {
-    speed = 2.0;
+    speed = 15.0;
 }
 
 - (IBAction)pauseBt:(id)sender {
@@ -275,23 +294,23 @@ Boolean isPlaying = NO;
 
 //scroll view delegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    NSLog(@"testOffset %f and height %f",self.webView1.scrollView.contentOffset.y,self.webView1.scrollView.bounds.size.height);
-    if(self.webView1.scrollView.contentOffset.y>=self.webView1.scrollView.bounds.size.height)
+    testOffset = self.webView1.scrollView.contentOffset.y;
+    NSLog(@"testOffset %f and height %f",testOffset,scrollViewHeight);
+    if(testOffset >= scrollViewHeight)
     {
         [self stopPray ];
+        
     }
-    
+    [self updateSliderValue:testOffset];
 }
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     testOffset=self.webView1.scrollView.contentOffset.y;
-    NSString *str = [NSString stringWithFormat:@"scrollViewDidEndDecelerating : testOffset %f",testOffset];
-    NSLog(str);
+    NSLog(@"scrollViewDidEndDecelerating : testOffset %f",testOffset);
 }
 -(void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
     
     testOffset=self.webView1.scrollView.contentOffset.y;
-    if(testOffset>=self.webView1.scrollView.bounds.size.height)
+    if(testOffset>=scrollViewHeight)
     {
         [self stopPray ];
         [self.webView1.scrollView setContentOffset:CGPointMake(0, self.webView1.scrollView.contentOffset.y) animated:YES];
@@ -300,8 +319,7 @@ Boolean isPlaying = NO;
         testOffset=0;
     }
     testOffset=self.webView1.scrollView.contentOffset.y;
-    NSString *str = [NSString stringWithFormat:@" scrollViewWillEndDragging : testOffset %f",testOffset];
-    NSLog(str);
+    NSLog(@" scrollViewWillEndDragging : testOffset %f",testOffset);
     
 }
 
@@ -311,26 +329,33 @@ Boolean isPlaying = NO;
     
     CGPoint bottomOffset = CGPointMake(0, testOffset+=speed);
     [self.webView1.scrollView setContentOffset:bottomOffset animated:YES];
-    
-    NSLog(@"%f",self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height);
-    NSLog(@"%f",testOffset);
-    
-//    [_btPause addTarget:self action:@selector(pauseBt:) forControlEvents:UIControlEventTouchUpInside];
-    
-    if (testOffset >= self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height) {
+    if (testOffset >= scrollViewHeight) {
         
         if (Timer) {
             [Timer invalidate];
             Timer = nil;
             testOffset = 0;
         }
+        return;
     }
+   
+    
+    NSLog(@"point to stop %f",self.webView1.scrollView.contentSize.height - self.webView1.scrollView.bounds.size.height);
+    NSLog(@"offset %f",testOffset);
+    
+//    [_btPause addTarget:self action:@selector(pauseBt:) forControlEvents:UIControlEventTouchUpInside];
+    
+
 }
 
 -(void)stopPray{
     
     //CGPoint OffsetStart = CGPointMake(0, 0);
     //[self.webView1.scrollView setContentOffset:OffsetStart animated:YES];
+    //isPlaying = NO;
+    if(numPrayRemain > 0) numPrayRemain -=1;
+    [self updateLabelRemainPray];
+    [_btPlay setImage:[UIImage imageNamed:@"button_play"] forState:UIControlStateNormal];
     if (Timer) {
         [Timer invalidate];
         Timer = nil;
@@ -341,6 +366,8 @@ Boolean isPlaying = NO;
    // speed = 0.0;
     //    _btPlay.hidden = NO;
     //    _btPause.hidden = YES;
+    //isPlaying = NO;
+    [_btPlay setImage:[UIImage imageNamed:@"button_play"] forState:UIControlStateNormal];
     if (Timer) {
         [Timer invalidate];
         Timer = nil;
@@ -351,6 +378,32 @@ Boolean isPlaying = NO;
 -(void) viewDidDisappear:(BOOL)animated{
     // stop pray when view disappear
     [self stopPray];
+}
+
+-(void) updateScrollView{
+
+}
+-(void)updateSliderValue:(float)value{
+    _slider.value = value;
+}
+
+-(IBAction)sliderValueChanged:(UISlider *)sender
+{
+    NSLog(@"slider value = %f", sender.value);
+    [_webView1.scrollView setContentOffset:CGPointMake(0.0, sender.value)];
+}
+
+- (void)sliderDrag:(NSNotification *)notification {
+    [self pausePray];
+}
+
+- (void)sliderStopDrag:(NSNotification *)notification {
+    [_btPlay sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)updateLabelRemainPray{
+    NSString *str = [NSString stringWithFormat:@"%d",numPrayRemain];
+    //[_labelNumRemain setText:str];
 }
 
 @end
