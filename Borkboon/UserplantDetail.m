@@ -189,12 +189,12 @@
             break;
     }
 }
-//go Setting
+
 -(void)setting{
     SettingViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingView"];
     tvc.getName = _titleName;
     tvc.getPlanName = _getPlan;
-    tvc.getUserId = _getuId;
+    
     [self.navigationController pushViewController:tvc animated:YES];
 }
 - (IBAction)smBt:(id)sender {
@@ -209,9 +209,10 @@
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        [controller setInitialText:[[NSString alloc] initWithFormat:@"กำลังสวดมนต์ %@", _titleName]];
-        [controller addURL:[NSURL URLWithString:@""]];
-        [controller addImage:[UIImage imageNamed:@"logo_app.png"]];
+        
+        [controller setInitialText:@""];
+        [controller addURL:[NSURL URLWithString:@"http://www.appcoda.com"]];
+        
         [self presentViewController:controller animated:YES completion:Nil];
         
     }
@@ -223,5 +224,17 @@
     NSString *jsString = [[NSString alloc] initWithFormat:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '%d%%'", fontSize];
     
     [_webView1 stringByEvaluatingJavaScriptFromString:jsString];
+}
+
+- (IBAction)slowBt:(id)sender {
+}
+
+- (IBAction)mediumBt:(id)sender {
+}
+
+- (IBAction)fastBt:(id)sender {
+}
+
+- (IBAction)playBt:(id)sender {
 }
 @end

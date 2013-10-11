@@ -10,6 +10,7 @@
 		39C1F94C17F95E3A00A6752C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C1F94B17F95E3A00A6752C /* AdSupport.framework */; };
 		39C1F94E17F95E4B00A6752C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C1F94D17F95E4B00A6752C /* Accounts.framework */; };
 		39C1F95017F95EC200A6752C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39C1F94F17F95EC200A6752C /* Security.framework */; };
+		E1036FF01807BB26003DF40B /* UserplantDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E1036FEF1807BB26003DF40B /* UserplantDetail.m */; };
 		E1062C8A17D9E21A008C37A7 /* UserplansViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = E1062C8917D9E21A008C37A7 /* UserplansViewController2.m */; };
 		E11A53BC17D0439300E7573B /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = E11A53B517D0439300E7573B /* camera.png */; };
 		E11A53BD17D0439300E7573B /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = E11A53B617D0439300E7573B /* logo.png */; };
@@ -114,7 +115,6 @@
 		E150D8C717FA73F80026C4D7 /* star_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = E150D8C417FA73E40026C4D7 /* star_yellow.png */; };
 		E150D8C817FA73F80026C4D7 /* star_yellow-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = E150D8C517FA73ED0026C4D7 /* star_yellow-gray.png */; };
 		E150D8CA17FA776A0026C4D7 /* icon_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = E150D8C917FA77660026C4D7 /* icon_clock.png */; };
-		E150DAE317FBCEFE0026C4D7 /* DAAutoScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = E150DAE217FBCEFE0026C4D7 /* DAAutoScroll.m */; };
 		E150DAE617FDD0AB0026C4D7 /* RepeatTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E150DAE517FDD0AB0026C4D7 /* RepeatTimeViewController.m */; };
 		E175D95A17C92FE500F54614 /* Prayer-basicDetailViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = E175D95917C92FE500F54614 /* Prayer-basicDetailViewController1.m */; };
 		E17A078517DE366100DD65FC /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17A078417DE366000DD65FC /* InfoViewController.m */; };
@@ -148,7 +148,6 @@
 		E17AD70F17C2044400CD6574 /* Prayer-basicViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = E17AD70E17C2044400CD6574 /* Prayer-basicViewController1.m */; };
 		E1AE5E8C17E9684100AC0055 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AE5E8B17E9684100AC0055 /* MessageUI.framework */; };
 		E1AE5E9217EAB8C700AC0055 /* UserplansCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE5E9117EAB8C700AC0055 /* UserplansCheckViewController.m */; };
-		E1AE5E9517EB009600AC0055 /* UserplantDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE5E9417EB009600AC0055 /* UserplantDetail.m */; };
 		E1AE5E9B17EBF79100AC0055 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE5E9A17EBF79000AC0055 /* SettingViewController.m */; };
 		E1B1843F17EFEAE3000302DD /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B1843E17EFEAE3000302DD /* MenuViewController.m */; };
 		E1B1844217EFEC1F000302DD /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B1844117EFEC1F000302DD /* CollectionCell.m */; };
@@ -338,6 +337,7 @@
 		39C1F94B17F95E3A00A6752C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		39C1F94D17F95E4B00A6752C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		39C1F94F17F95EC200A6752C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E1036FEF1807BB26003DF40B /* UserplantDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserplantDetail.m; sourceTree = "<group>"; };
 		E1062C8817D9E21A008C37A7 /* UserplansViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserplansViewController2.h; sourceTree = "<group>"; };
 		E1062C8917D9E21A008C37A7 /* UserplansViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserplansViewController2.m; sourceTree = "<group>"; };
 		E11A53B517D0439300E7573B /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
@@ -461,8 +461,6 @@
 		E150D8C417FA73E40026C4D7 /* star_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_yellow.png; sourceTree = "<group>"; };
 		E150D8C517FA73ED0026C4D7 /* star_yellow-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_yellow-gray.png"; sourceTree = "<group>"; };
 		E150D8C917FA77660026C4D7 /* icon_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_clock.png; sourceTree = "<group>"; };
-		E150DAE117FBCEFE0026C4D7 /* DAAutoScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAAutoScroll.h; sourceTree = "<group>"; };
-		E150DAE217FBCEFE0026C4D7 /* DAAutoScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAAutoScroll.m; sourceTree = "<group>"; };
 		E150DAE417FDD0AB0026C4D7 /* RepeatTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatTimeViewController.h; sourceTree = "<group>"; };
 		E150DAE517FDD0AB0026C4D7 /* RepeatTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatTimeViewController.m; sourceTree = "<group>"; };
 		E175D95817C92FE500F54614 /* Prayer-basicDetailViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Prayer-basicDetailViewController1.h"; sourceTree = "<group>"; };
@@ -509,7 +507,6 @@
 		E1AE5E9017EAB8C600AC0055 /* UserplansCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserplansCheckViewController.h; path = ../UserplansCheckViewController.h; sourceTree = "<group>"; };
 		E1AE5E9117EAB8C700AC0055 /* UserplansCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserplansCheckViewController.m; path = ../UserplansCheckViewController.m; sourceTree = "<group>"; };
 		E1AE5E9317EB009500AC0055 /* UserplantDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserplantDetail.h; sourceTree = "<group>"; };
-		E1AE5E9417EB009600AC0055 /* UserplantDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserplantDetail.m; sourceTree = "<group>"; };
 		E1AE5E9917EBF79000AC0055 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		E1AE5E9A17EBF79000AC0055 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		E1B1843D17EFEAE3000302DD /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -746,7 +743,7 @@
 				E1062C8817D9E21A008C37A7 /* UserplansViewController2.h */,
 				E1062C8917D9E21A008C37A7 /* UserplansViewController2.m */,
 				E1AE5E9317EB009500AC0055 /* UserplantDetail.h */,
-				E1AE5E9417EB009600AC0055 /* UserplantDetail.m */,
+				E1036FEF1807BB26003DF40B /* UserplantDetail.m */,
 				E1AE5E9917EBF79000AC0055 /* SettingViewController.h */,
 				E1AE5E9A17EBF79000AC0055 /* SettingViewController.m */,
 				E1B1845917F15349000302DD /* Plantime.h */,
@@ -858,15 +855,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		E150DAE017FBCEE90026C4D7 /* DAAutoScroll */ = {
-			isa = PBXGroup;
-			children = (
-				E150DAE117FBCEFE0026C4D7 /* DAAutoScroll.h */,
-				E150DAE217FBCEFE0026C4D7 /* DAAutoScroll.m */,
-			);
-			path = DAAutoScroll;
-			sourceTree = "<group>";
-		};
 		E175D95E17C9338500F54614 /* Pray1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,7 +925,6 @@
 			isa = PBXGroup;
 			children = (
 				E1C5ED741803EB2A00F3208A /* calenda */,
-				E150DAE017FBCEE90026C4D7 /* DAAutoScroll */,
 				E11A564A17D86C4E00E7573B /* base64 */,
 				E11A562117D73C4B00E7573B /* json */,
 				E1E0E5BE18077D040097DD5A /* iPad@2x */,
@@ -1315,6 +1302,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E0E5A0180653030097DD5A /* icon_fullmoon@2x.png in Resources */,
+				E1E0E5A1180653030097DD5A /* icon_moon@2x.png in Resources */,
+				E1C5EDB81803F85300F3208A /* icon_fullmoon.png in Resources */,
+				E1C5EDB91803F85300F3208A /* icon_moon.png in Resources */,
 				E17AD2B117C1D39100CD6574 /* InfoPlist.strings in Resources */,
 				E17AD2B917C1D39100CD6574 /* Default.png in Resources */,
 				E17AD2BB17C1D39100CD6574 /* Default@2x.png in Resources */,
@@ -1441,8 +1432,6 @@
 				E1C5EDB21803EB2B00F3208A /* calendar2028.xml in Resources */,
 				E1C5EDB31803EB2B00F3208A /* calendar2029.xml in Resources */,
 				E1C5EDB41803EB2B00F3208A /* calendarxml.xml in Resources */,
-				E1C5EDB81803F85300F3208A /* icon_fullmoon.png in Resources */,
-				E1C5EDB91803F85300F3208A /* icon_moon.png in Resources */,
 				E1C5EDBA1803F85300F3208A /* icon_stopwatch.png in Resources */,
 				E1C5EDBE1803F88D00F3208A /* icon_fullmoon ~ipad.png in Resources */,
 				E1C5EDBF1803F88D00F3208A /* icon_moon ~ipad.png in Resources */,
@@ -1473,8 +1462,6 @@
 				E1E0E59D180653030097DD5A /* icon_delete_01@2x.png in Resources */,
 				E1E0E59E180653030097DD5A /* icon_delete_02@2x.png in Resources */,
 				E1E0E59F180653030097DD5A /* icon_facebook@2x.png in Resources */,
-				E1E0E5A0180653030097DD5A /* icon_fullmoon@2x.png in Resources */,
-				E1E0E5A1180653030097DD5A /* icon_moon@2x.png in Resources */,
 				E1E0E5A2180653030097DD5A /* icon_mypraylist@2x.png in Resources */,
 				E1E0E5A3180653030097DD5A /* icon_n_red@2x.png in Resources */,
 				E1E0E5A4180653030097DD5A /* icon_plans-prayer_blue@2x.png in Resources */,
@@ -1622,12 +1609,10 @@
 				E17A079417DEE55600DD65FC /* Info1ViewController.m in Sources */,
 				E17A079717DEED1500DD65FC /* Info2ViewController.m in Sources */,
 				E1AE5E9217EAB8C700AC0055 /* UserplansCheckViewController.m in Sources */,
-				E1AE5E9517EB009600AC0055 /* UserplantDetail.m in Sources */,
 				E1AE5E9B17EBF79100AC0055 /* SettingViewController.m in Sources */,
 				E1B1843F17EFEAE3000302DD /* MenuViewController.m in Sources */,
 				E1B1844217EFEC1F000302DD /* CollectionCell.m in Sources */,
 				E1B1845B17F1534C000302DD /* Plantime.m in Sources */,
-				E150DAE317FBCEFE0026C4D7 /* DAAutoScroll.m in Sources */,
 				E150DAE617FDD0AB0026C4D7 /* RepeatTimeViewController.m in Sources */,
 				E1C5ECE71801829300F3208A /* ViewControllerTest.m in Sources */,
 				E1C5ECEC180311E600F3208A /* Data.xcdatamodeld in Sources */,
@@ -1639,6 +1624,7 @@
 				E1C5ED9E1803EB2B00F3208A /* UIColor+CXCalendar.m in Sources */,
 				E1C5ED9F1803EB2B00F3208A /* UILabel+CXCalendar.m in Sources */,
 				E1C5EDC918041A5200F3208A /* User.m in Sources */,
+				E1036FF01807BB26003DF40B /* UserplantDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

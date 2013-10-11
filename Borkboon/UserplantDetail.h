@@ -37,6 +37,11 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView3;
 - (IBAction)smBt:(id)sender;
 - (IBAction)LBt:(id)sender;
+- (IBAction)slowBt:(id)sender;
+- (IBAction)mediumBt:(id)sender;
+- (IBAction)fastBt:(id)sender;
+- (IBAction)playBt:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btPlay;
 
 
 @end

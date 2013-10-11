@@ -9,7 +9,6 @@
 #import "Prayer-basicDetailViewController1.h"
 #import "UserplansCheckViewController.h"
 #import <Social/Social.h>
-#import "DAAutoScroll.h"
 
 @interface Prayer_basicDetailViewController1 ()
 {
