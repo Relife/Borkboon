@@ -18,6 +18,15 @@
 @implementation SettingViewController
 AppDelegate *appDelegate;
 
+//
+- (NSManagedObjectContext *)managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,6 +55,9 @@ AppDelegate *appDelegate;
     }
     
     [super viewDidLoad];
+    _nameLabel.text = _getName;
+    _planNameLabel.text = _getPlanName;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(sentValue:)
                                                  name:@"SentRepeat"
@@ -75,15 +87,26 @@ AppDelegate *appDelegate;
         User *p = _dataRecords[i];
         NSLog(@"uId = %@",p.uId);
         NSLog(@"planName = %@",p.planName);
+        _showPlanName = p.planName;
         NSLog(@"prayName = %@",p.prayName);
         NSLog(@"startTime = %@",p.startTime);
+        _showTime = p.startTime;
         NSLog(@"repeat = %@",p.repeat);
-        NSLog(@"snooze = %@",p.snooze);        
+        _showRepeat = p.repeat;
+        NSLog(@"snooze = %@",p.snooze);
+        _showSnooze = p.snooze;
+        
+        NSLog(@">>>>%@",_showPlanName);
+
+        
     }
-    _nameLabel.text = _getName;
-    _planNameLabel.text = _getPlanName;
-    _timeStartLabel.text = _timeStart;
-    _repeatLabel.text = _getRepeat;
+    
+    if ([_showPlanName isEqual:_getPlanName]) {
+        _timeStartLabel.text = _showTime;
+        _repeatLabel.text = _showRepeat;
+    }
+//    _timeStartLabel.text = _timeStart;
+//    _repeatLabel.text = _getRepeat;
 }
 
 -(NSArray *) fetchData
@@ -217,12 +240,14 @@ AppDelegate *appDelegate;
     [[appDelegate managedObjectContext] save:nil];
     }
     
+    
     UILocalNotification *notif = [[UILocalNotification alloc] init];
     
     notif.fireDate = _dateTime;
     notif.timeZone = [NSTimeZone defaultTimeZone];
     
-    notif.alertBody = @"Did you forget something?";
+    notif.alertBody = [NSString stringWithFormat:
+     @"เวลาสวดมนต์ %@",_timeStart];
     notif.alertAction = @"Show me";
     notif.soundName = UILocalNotificationDefaultSoundName;
     notif.applicationIconBadgeNumber = 1;

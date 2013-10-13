@@ -29,4 +29,9 @@
 
 @property (nonatomic,strong) NSMutableArray *dataRecords;
 
+@property (strong, nonatomic) NSString *showPlanName;
+@property (strong, nonatomic) NSString *showRepeat;
+@property (strong, nonatomic) NSString *showTime;
+@property (strong, nonatomic) NSString *showSnooze;
+
 @end

@@ -107,6 +107,7 @@
 {
     // Override point for customization after application launch.
     application.applicationIconBadgeNumber = 0;
+    
         //Tab bar
         UIImage* tabBarBackground = [UIImage imageNamed:@"bar_down.png"];
         [[UITabBar appearance] setBackgroundImage:tabBarBackground];
@@ -125,10 +126,21 @@
         UIImage *navBar = [UIImage imageNamed:@"bar.png"];
     
         [[UINavigationBar appearance] setBackgroundImage:navBar forBarMetrics:UIBarMetricsDefault];
+    
+    //Navbar text
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor whiteColor],UITextAttributeTextColor,[UIColor grayColor],UITextAttributeTextShadowColor,
+      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+      UITextAttributeTextShadowOffset,
+      [UIFont fontWithName:@"Arial-Bold" size:50.0],
+      UITextAttributeFont,
+      nil]];
+
 
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

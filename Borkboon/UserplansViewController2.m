@@ -174,7 +174,7 @@
     NSString *idPray = [notification.object objectForKey:@"idPray"];
     
     //check    
-    NSString *post =[[NSString alloc] initWithFormat:@"pray_script_id=%@&method=check&mainstorage_id=%@",idPray,_getMainId];
+    NSString *post =[[NSString alloc] initWithFormat:@"pray_script_id=%@&method=check&mainstorage_id=%@",idPray,_getId];
     NSLog(@"PostData: %@",post);
     
     NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getSubstorage.php"];
@@ -214,6 +214,7 @@
         _st = [jsonData objectForKey:@"status"];
         NSLog(@"status %@",_st);
     }
+    
     //show alert
     if ([_st isEqual: @"no"]){
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"ไม่สามารถเพิ่มเข้ารายการได้"
@@ -225,7 +226,7 @@
     }
     //Add pray
     else if([_st isEqual: @"yes"]){
-        NSString *post =[[NSString alloc] initWithFormat:@"pray_script_id=%@&method=insert&mainstorage_id=%@",idPray,_getMainId];
+        NSString *post =[[NSString alloc] initWithFormat:@"pray_script_id=%@&method=insert&mainstorage_id=%@",idPray,_getId];
         NSLog(@"PostData: %@",post);
         
         NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/getSubstorage.php"];

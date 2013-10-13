@@ -119,15 +119,52 @@
                                                           NSDictionary* result,
                                                           NSError *error) {
                 NSArray* friends = [result objectForKey:@"data"];
+                _jsonStringFriend = [friends JSONRepresentation];
                 _friendFb = [result objectForKey:@"data"];
                 NSLog(@"Found: %i friends", friends.count);
                 for (NSDictionary<FBGraphUser>* friend in friends) {
 //                    NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
                 }
+                
+                NSString *post =[[NSString alloc] initWithFormat:@"fb=y&firstname=%@&lastname=%@&bod=%@&image=%@&fb_id=%@&friend=%@",_firstName,_lastName,_birthDay,_image,_fb_id,_jsonStringFriend];
+                NSLog(@"PostData: %@",post);
+                
+                NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/signin.php"];
+                
+                NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+                
+                NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+                
+                NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+                [request setURL:url];
+                [request setHTTPMethod:@"POST"];
+                [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+                [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+                [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                [request setHTTPBody:postData];
+                
+                NSHTTPURLResponse *response = nil;
+                NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+                
+                NSLog(@"Response code: %d", [response statusCode]);
+                if ([response statusCode] >=200 && [response statusCode] <300)
+                {
+                    NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
+                    NSLog(@"Response ==> %@", responseData);
+                    
+                    SBJsonParser *jsonParser = [SBJsonParser new];
+                    NSDictionary *jsonData = (NSDictionary *) [jsonParser objectWithString:responseData error:nil];
+                    NSLog(@"%@",jsonData);
+                    NSString *status = [jsonData objectForKey:@"status"];
+                    NSLog(@"%@",status);
+                    NSString *uId = [[jsonData objectForKey:@"userinfo"] objectForKey:@"uid"];
+                    NSLog(@"uId=%@",uId);
+                }
+
             }];
             
                     
-//            NSString *post =[[NSString alloc] initWithFormat:@"fb=y&firstname=%@&lastname=%@&bod=%@&image=%@&fb_id=%@&friend=%@",_firstName,_lastName,_birthDay,_image,_fb_id,_friendFb];
+//            NSString *post =[[NSString alloc] initWithFormat:@"fb=y&firstname=%@&lastname=%@&bod=%@&image=%@&fb_id=%@&friend=%@",_firstName,_lastName,_birthDay,_image,_fb_id,_jsonStringFriend];
 //            NSLog(@"PostData: %@",post);
 //            
 //            NSURL *url=[NSURL URLWithString:@"http://codegears.co.th/borkboon/signin.php"];

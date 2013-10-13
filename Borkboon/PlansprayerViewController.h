@@ -20,5 +20,5 @@
 @property (strong, nonatomic) NSString *image;
 @property (strong, nonatomic) NSString *fb_id;
 @property (strong, nonatomic) NSArray *friendFb;
-
+@property (strong, nonatomic) NSString *jsonStringFriend;
 @end
