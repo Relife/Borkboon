@@ -9,11 +9,11 @@
             <objects>
                 <viewController id="Byj-gm-AgH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VHF-zm-H3g">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Introduction_01.png" id="xsw-2H-ovm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
@@ -39,7 +39,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2166" y="-1029"/>
+            <point key="canvasLocation" x="-2199" y="-1029"/>
         </scene>
         <!--View Controller - 2 of 4-->
         <scene sceneID="Ghh-Uz-iMg">
@@ -88,7 +88,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1751" y="-1029"/>
+            <point key="canvasLocation" x="-1779" y="-1029"/>
         </scene>
         <!--View Controller - 3 of 4-->
         <scene sceneID="Bnf-Y0-wNI">
@@ -2117,9 +2117,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="L8r-VN-kvH"/>
-        <segue reference="o4g-zf-0Mp"/>
         <segue reference="gR6-ji-TFL"/>
+        <segue reference="RKO-bc-tYS"/>
         <segue reference="L0I-hh-J66"/>
+        <segue reference="Ahf-8C-rcA"/>
     </inferredMetricsTieBreakers>
 </document>
