@@ -43,6 +43,21 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btPlay;
 @property (strong, nonatomic) IBOutlet UIButton *btPause;
+@property (strong, nonatomic) IBOutlet UIButton *smClick;
+@property (strong, nonatomic) IBOutlet UIButton *laClick;
+@property (strong, nonatomic) IBOutlet UIButton *slowClick;
+@property (strong, nonatomic) IBOutlet UIButton *mediumClick;
+@property (strong, nonatomic) IBOutlet UIButton *fastClick;
+
+@property (strong,nonatomic) NSString *stateFont;
+@property (strong,nonatomic) NSString *stateSpeed;
+
+@property (strong,nonatomic) NSString *loop
+;
+
+@property (strong, nonatomic) NSMutableArray *getAllId;
+@property (strong, nonatomic) NSMutableArray *getAllTitle;
+@property (assign) int indexPath;
 
 
 @end

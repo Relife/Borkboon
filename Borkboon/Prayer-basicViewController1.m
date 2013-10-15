@@ -14,10 +14,12 @@
 {
     NSMutableArray *allObject;
     NSMutableArray *displayObject;
+    NSMutableArray *idArr;
+    NSMutableArray *titleArr;
     
     // A dictionary object
     NSDictionary *dict;
-    
+
     // Define keys
     NSString *titleId;
     NSString *titleName;
@@ -97,7 +99,9 @@
     
     // Create array to hold dictionaries
     allObject = [[NSMutableArray alloc] init];
-    
+    idArr = [[NSMutableArray alloc] init];
+    titleArr = [[NSMutableArray alloc] init];
+
     // extract specific value...
     _results = [res objectForKey:@"pray_group_list"];
 
@@ -110,9 +114,13 @@
                 if ([idprg isEqual: _menu]) {
                 for (NSDictionary *prs in _prayGroup){
                     NSString *strId = [prs objectForKey:@"id"];
+//                    NSLog(@"%@",strId);
                     NSString *strTitlename = [prs objectForKey:@"name"];
                     NSString *strPicname = [prs objectForKey:@"image"];
                     NSString *strIsnew = [prs objectForKey:@"is_new"];
+                    
+                    [idArr addObject:strId];
+                    [titleArr addObject:strTitlename];
                     
                     dict = [NSDictionary dictionaryWithObjectsAndKeys:
                             strId, titleId,
@@ -125,6 +133,7 @@
             }
         }
     displayObject =[[NSMutableArray alloc] initWithArray:allObject];
+//    NSLog(@"%@",idArr);    
     [self.myTab reloadData];
     }
 
@@ -150,7 +159,7 @@
     
     NSString *cellValue = [tmpDict objectForKey:titleName];
         cell.textLabel.text = cellValue;
-    return cell;
+    return cell;    
 }
 
 
@@ -187,6 +196,7 @@
     [searchBar resignFirstResponder];
 }
 
+//select cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Prayer_basicDetailViewController1 *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Prayer_basicDetail"];
@@ -195,7 +205,10 @@
     NSDictionary *tmpDict = [displayObject objectAtIndex:indexPath.row];
     tvc.titleId = [tmpDict objectForKey:titleId];
     tvc.titleName = [tmpDict objectForKey:titleName];
+    tvc.getAllId = idArr;
+    tvc.getAllTitle = titleArr;
     
+    [tvc setIndexPath:indexPath.row];
     [self.navigationController pushViewController:tvc animated:YES];
 }
 
